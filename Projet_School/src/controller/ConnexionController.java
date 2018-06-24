@@ -36,12 +36,12 @@ public class ConnexionController extends Connexion {
 			ResultSet rs = null;
 			Boolean b = false;
 			try {
-				String sql = "SELECT login, passwd FROM connexion WHERE login = ?";
+				String sql = "SELECT identifiant, password FROM compte WHERE login = ?";
 				PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 				ps.setString(1, login);
 				rs = ps.executeQuery();
 				while (rs.next()) {
-					if((login.equals(rs.getString("login"))) && (mdp.equals(rs.getString("passwd")))){
+					if((login.equals(rs.getString("identifiant"))) && (mdp.equals(rs.getString("password")))){
 						b = true;
 						infosUser = con.info(login);
 					}
@@ -61,7 +61,7 @@ public class ConnexionController extends Connexion {
 			// si c'est le bouton pour s'inscrire
 			if(event.getSource()== buttonSign) {
 				try {
-					Main.changeScene("SignIn.fxml");
+					Main.changeScene("fxml/SignIn.fxml");
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 					System.out.println("Impossible d'afficher la page d'inscription !");
@@ -114,7 +114,7 @@ public class ConnexionController extends Connexion {
 							Main.getUser().setNom(infosUser.get(4)); // nom
 							Main.getUser().setPrenom(infosUser.get(5)); // prénom
 								
-							// si la perosnne est un enseignant on lui ajoute sa matière
+							// si la personne est un enseignant on lui ajoute son cours
 							if(infosUser.size() > 7) {
 								Main.getUser().setCours(infosUser.get(6));
 							}
@@ -124,7 +124,7 @@ public class ConnexionController extends Connexion {
 						Main.getUser().setId(Integer.parseInt(infosUser.get(0))); // id
 						Main.getUser().setPassword(infosUser.get(1)); // mdp
 						
-						Main.changeScene("Connected.fxml");
+						Main.changeScene("fxml/Connected.fxml");
 	 				} catch (IOException er) {
 						System.err.println(er.getMessage());
 						System.out.println("Impossible d'afficher la page home !");

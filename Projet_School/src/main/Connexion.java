@@ -55,7 +55,7 @@ public class Connexion {
 		String statut = null;;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT statut FROM connexion WHERE login = ?";
+			String sql = "SELECT fonction FROM compte WHERE login = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, login);
 			rs = ps.executeQuery();
@@ -77,7 +77,7 @@ public class Connexion {
 		String id = null;;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT IdConnexion FROM connexion WHERE login = ?";
+			String sql = "SELECT id FROM compte WHERE login = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, login);
 			rs = ps.executeQuery();
@@ -105,7 +105,7 @@ public class Connexion {
 		int cpt = 1;
 		int max;
 		try {
-			String sql = "SELECT * FROM connexion WHERE login = ?";
+			String sql = "SELECT * FROM compte WHERE login = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, login);
 			rs = ps.executeQuery();
