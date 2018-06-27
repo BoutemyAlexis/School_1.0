@@ -31,7 +31,7 @@ public class SignInController extends Connexion {
 	@FXML private Button buttonSignIn;
 	@FXML private Button buttonHome;
 	
-	public void signin(String nom, String prenom, String fonction, String identifiant, String password) {
+	public void signIn(String identifiant, String password, String nom, String prenom, String mail, String telephone, String fonction) {
 		connect();
 		ResultSet rs = null;
 		String sql = null;
@@ -39,7 +39,7 @@ public class SignInController extends Connexion {
 		String id = null;
 		try {
 			// on met NULL pour la colonne qui est auto_increment dans la bdd
-			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,?)";
+			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,0)";
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
 			ps2.setString(1, identifiant);
 			ps2.setString(2, password);
@@ -54,16 +54,18 @@ public class SignInController extends Connexion {
 			}
 			
 			if(fonction.equals("enseignant")) {
-				sql = "INSERT INTO enseignant (id, nomEnseignant, prenomEnseignant, matiere1Enseignant, matiere2Enseignant,"
-						+ "matiere2Enseignant_2, Id_Connexion) VALUES (NULL,?,?,'','','',?)";
+				sql = "INSERT INTO enseignant (id, identifiant, prenom, nom, mail, telephone, idCours) VALUES (?,?,?,?,?,?,0)";
 			}
 			else {
-				sql = "INSERT INTO etudiant (id, nomEtudiant, prenomEtudiant, Id_Connexion) VALUES (NULL,?,?,?)";
+				sql = "INSERT INTO etudiant (id, identifiant, prenom, nom, mail, telephone)  VALUES (?,?,?,?,?,?)";
 			}
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
-			ps.setString(1, nom);
-			ps.setString(2, prenom);
-			ps.setString(3, id);
+			ps.setString(1, id);
+			ps.setString(2, identifiant);
+			ps.setString(3, prenom);
+			ps.setString(4, nom);
+			ps.setString(5, mail);
+			ps.setString(6, telephone);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,7 +87,7 @@ public class SignInController extends Connexion {
 		}
 		else {
 			try {
-				signin(nom.getText(), prenom.getText(), fonction.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
+				signIn(id.getText(), password.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText(), fonction.getSelectionModel().getSelectedItem() );
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
@@ -119,7 +121,7 @@ public class SignInController extends Connexion {
 			}
 			else {
 				try {
-					signin(nom.getText(), prenom.getText(), fonction.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
+					signIn(id.getText(), password.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText(), fonction.getSelectionModel().getSelectedItem() );
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Information");
 					alert.setHeaderText("Votre demande d'inscription a bien été pris en compte.");

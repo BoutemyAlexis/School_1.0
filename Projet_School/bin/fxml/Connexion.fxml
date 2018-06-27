@@ -26,7 +26,7 @@
             <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="id" focusTraversable="false" onKeyPressed="#keyAction" prefHeight="40.0" prefWidth="250.0" promptText="Identifiant" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+            <TextField fx:id="id" focusTraversable="true" onKeyPressed="#keyAction" prefHeight="40.0" prefWidth="250.0" promptText="Identifiant" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>

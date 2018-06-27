@@ -85,7 +85,7 @@
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <TextField fx:id="id" focusTraversable="false" promptText="mail ou pseudo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="id" focusTraversable="true" promptText="mail ou pseudo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="password" focusTraversable="false" promptText="Exemple" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="function" focusTraversable="false" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <items>

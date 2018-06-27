@@ -33,19 +33,19 @@ public class ConnexionController extends Connexion {
 		@FXML private Label error;
 		
 		
-		public boolean connexion (String login, String mdp) {
+		public boolean connexion (String identifiant, String mdp) {
 			connect();
 			ResultSet rs = null;
 			Boolean b = false;
 			try {
 				String sql = "SELECT identifiant, password FROM compte WHERE identifiant = ? AND actif = 1";
 				PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
-				ps.setString(1, login);
+				ps.setString(1, identifiant);
 				rs = ps.executeQuery();
 				while (rs.next()) {
-					if((login.equals(rs.getString("identifiant"))) && (mdp.equals(rs.getString("password")))){
+					if((identifiant.equals(rs.getString("identifiant"))) && (mdp.equals(rs.getString("password")))){
 						b = true;
-						infosUser = con.getInfos(login);
+						infosUser = con.getInfos(identifiant);
 						System.out.println("Taille AL = " + infosUser.size());
 					}
 				}
@@ -71,48 +71,50 @@ public class ConnexionController extends Connexion {
 				}
 			}
 			else { // si c'est le bouton connexion
-				if(connexion(id.getText(), password.getText())) {	
-	 				try {
-	 					if( !(id.getText().equals("admin")) && !(password.getText().equals("admin")) ) {
-	 						String fonction = infosUser.get(0).toString();
-	 						
-	 						if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
-	 							Main.getEtudiant().setId(Integer.parseInt(infosUser.get(1).toString()));
-	 							Main.getEtudiant().setIdentifiant(infosUser.get(2).toString());
-	 							Main.getEtudiant().setPrenom(infosUser.get(3).toString());
-	 							Main.getEtudiant().setNom(infosUser.get(4).toString());
-	 							Main.getEtudiant().setMail(infosUser.get(5).toString());
-	 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
-	 						}
-	 						if(fonction.equals("enseignant")|| fonction.equals("Enseigant")) {
-	 							Main.getEnseignant().setId(Integer.parseInt(infosUser.get(1).toString()));
-	 							Main.getEnseignant().setIdentifiant(infosUser.get(2).toString());
-	 							Main.getEnseignant().setPrenom(infosUser.get(3).toString());
-	 							Main.getEnseignant().setNom(infosUser.get(4).toString());
-	 							Main.getEnseignant().setMail(infosUser.get(5).toString());
-	 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
-	 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
-	 						}
-	 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
-	 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
-	 							Main.getSecretaire().setIdentifiant(infosUser.get(2).toString());
-	 							Main.getSecretaire().setPrenom(infosUser.get(3).toString());
-	 							Main.getSecretaire().setNom(infosUser.get(4).toString());
-	 							Main.getSecretaire().setMail(infosUser.get(5).toString());
-	 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
-	 						}
-	 					}
-	 					
-						Main.changeScene("/fxml/Connected.fxml");
-	 				} catch (IOException e) {
-						System.err.println(e.getMessage());
-						System.out.println("Impossible d'afficher la page home !");
-	 				}
-	 			}
-				else {
+				if(id.getText().isEmpty() || password.getText().isEmpty() ) {
 					error.setVisible(true);
 					password.setText("");
-				}			
+				}
+				else {
+					if(connexion(id.getText(), password.getText())) {	
+		 				try {
+		 					if( !(id.getText().equals("admin")) && !(password.getText().equals("admin")) ) {
+		 						String fonction = infosUser.get(0).toString();
+		 						
+		 						if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
+		 							Main.getEtudiant().setId(Integer.parseInt(infosUser.get(1).toString()));
+		 							Main.getEtudiant().setIdentifiant(infosUser.get(2).toString());
+		 							Main.getEtudiant().setPrenom(infosUser.get(3).toString());
+		 							Main.getEtudiant().setNom(infosUser.get(4).toString());
+		 							Main.getEtudiant().setMail(infosUser.get(5).toString());
+		 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
+		 						}
+		 						if(fonction.equals("enseignant")|| fonction.equals("Enseigant")) {
+		 							Main.getEnseignant().setId(Integer.parseInt(infosUser.get(1).toString()));
+		 							Main.getEnseignant().setIdentifiant(infosUser.get(2).toString());
+		 							Main.getEnseignant().setPrenom(infosUser.get(3).toString());
+		 							Main.getEnseignant().setNom(infosUser.get(4).toString());
+		 							Main.getEnseignant().setMail(infosUser.get(5).toString());
+		 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
+		 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
+		 						}
+		 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
+		 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
+		 							Main.getSecretaire().setIdentifiant(infosUser.get(2).toString());
+		 							Main.getSecretaire().setPrenom(infosUser.get(3).toString());
+		 							Main.getSecretaire().setNom(infosUser.get(4).toString());
+		 							Main.getSecretaire().setMail(infosUser.get(5).toString());
+		 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
+		 						}
+		 					}
+		 					
+							Main.changeScene("/fxml/Connected.fxml");
+		 				} catch (IOException e) {
+							System.err.println(e.getMessage());
+							System.out.println("Impossible d'afficher la page home !");
+		 				}
+		 			}
+				}		
 			}
 		}
 		
