@@ -23,39 +23,42 @@ public class SignInController extends Connexion {
 	@FXML private TextField id;
 	@FXML private TextField password;
 	@FXML private TextField nom; 
-	@FXML private TextField prenom; 
+	@FXML private TextField prenom;
+	@FXML private TextField mail; 
+	@FXML private TextField telephone; 
 	@FXML private ChoiceBox<String> fonction; 
 	
 	@FXML private Button buttonSignIn;
 	@FXML private Button buttonHome;
 	
-	public void signin(String nom, String prenom, String statut, String login, String passwd) {
+	public void signin(String nom, String prenom, String fonction, String identifiant, String password) {
 		connect();
 		ResultSet rs = null;
 		String sql = null;
 		String sql2 = null;
 		String id = null;
 		try {
-			sql2 = "INSERT INTO connexion (IdConnexion, login, passwd, Statut) VALUES (NULL,?,?,?)";
+			// on met NULL pour la colonne qui est auto_increment dans la bdd
+			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,?)";
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
-			ps2.setString(1, login);
-			ps2.setString(2, passwd);
-			ps2.setString(3, statut);
+			ps2.setString(1, identifiant);
+			ps2.setString(2, password);
+			ps2.setString(3, fonction);
 			ps2.executeUpdate();
-			String sql3 = "SELECT IdConnexion FROM connexion WHERE login = ?";
+			String sql3 = "SELECT id FROM compte WHERE identifiant = ?";
 			PreparedStatement ps3 = (PreparedStatement) cn.prepareStatement(sql3);
-			ps3.setString(1, login);
+			ps3.setString(1, identifiant);
 			rs = ps3.executeQuery();
 			while (rs.next()) {
-				id = rs.getString("Idconnexion");
+				id = rs.getString("id");
 			}
 			
-			if(statut.equals("Enseignant")) {
-				sql = "INSERT INTO enseignant (idEnseignant, nomEnseignant, prenomEnseignant, matiere1Enseignant, matiere2Enseignant,"
+			if(fonction.equals("enseignant")) {
+				sql = "INSERT INTO enseignant (id, nomEnseignant, prenomEnseignant, matiere1Enseignant, matiere2Enseignant,"
 						+ "matiere2Enseignant_2, Id_Connexion) VALUES (NULL,?,?,'','','',?)";
 			}
 			else {
-				sql = "INSERT INTO etudiant (idEtudiant, nomEtudiant, prenomEtudiant, Id_Connexion) VALUES (NULL,?,?,?)";
+				sql = "INSERT INTO etudiant (id, nomEtudiant, prenomEtudiant, Id_Connexion) VALUES (NULL,?,?,?)";
 			}
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, nom);
@@ -73,9 +76,8 @@ public class SignInController extends Connexion {
 	// méthode pour inscrire une personne
 	@FXML
 	private void signInAction(ActionEvent event) {
-		System.out.println(fonction.getSelectionModel().getSelectedItem());
 		
-		if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
+		if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || mail.getText().isEmpty() || telephone.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText("Il manque des informations !");
@@ -89,7 +91,7 @@ public class SignInController extends Connexion {
 				alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
 				alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
 				alert.showAndWait();
-				Main.changeScene("fxml/Connexion.fxml");
+				Main.changeScene("/fxml/Connexion.fxml");
 			} catch (IOException e) {
 			}
 		}
@@ -99,7 +101,7 @@ public class SignInController extends Connexion {
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("fxml/Connexion.fxml");
+			Main.changeScene("/fxml/Connexion.fxml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,7 +111,7 @@ public class SignInController extends Connexion {
 	@FXML
 	private void keyAction(KeyEvent e) {
 		if(e.getCode() == KeyCode.ENTER) {
-			if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
+			if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || mail.getText().isEmpty() || telephone.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText("Il manque des informations !");
@@ -123,15 +125,16 @@ public class SignInController extends Connexion {
 					alert.setHeaderText("Votre demande d'inscription a bien été pris en compte.");
 					alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
 					alert.showAndWait();
-					Main.changeScene("fxml/Connexion.fxml");
+					Main.changeScene("/fxml/Connexion.fxml");
 				} catch (IOException er) {
+					er.printStackTrace();
 				}
 			}
 		}
 		
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
-				Main.changeScene("fxml/Connexion.fxml");
+				Main.changeScene("/fxml/Connexion.fxml");
 			} catch (IOException er) {
 				er.printStackTrace();
 			}

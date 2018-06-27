@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#keyAction" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
+<AnchorPane onKeyPressed="#keyAction" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #C0C0C0;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
    <children>
       <GridPane prefHeight="800.0" prefWidth="800.0">
         <columnConstraints>
@@ -28,11 +28,13 @@
           <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="nom" focusTraversable="false" promptText="Exemple" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <TextField fx:id="prenom" focusTraversable="false" promptText="Exemple" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="nom" focusTraversable="false" promptText="John" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <TextField fx:id="prenom" focusTraversable="false" promptText="Smith" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Nom :" textFill="#f50000" GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -49,7 +51,7 @@
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <Label text="Fonction :" textFill="RED" GridPane.rowIndex="5">
+            <Label text="Fonction :" textFill="RED" GridPane.rowIndex="7">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -57,12 +59,12 @@
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <Button fx:id="buttonSignIn" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#signInAction" text="S'inscrire" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Button fx:id="buttonSignIn" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#signInAction" text="S'inscrire" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="buttonHome" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#homeAction" text="Retour Accueil" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Button fx:id="buttonHome" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#homeAction" text="Retour Accueil" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -85,19 +87,37 @@
             </Label>
             <TextField fx:id="id" focusTraversable="false" promptText="mail ou pseudo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="password" focusTraversable="false" promptText="Exemple" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="function" focusTraversable="false" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <ChoiceBox fx:id="function" focusTraversable="false" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <items>
                   <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Etudiant" />
-                     <String fx:value="Enseignant" />
+                     <String fx:value="etudiant" />
+                     <String fx:value="enseignant" />
                   </FXCollections>
                </items>
             </ChoiceBox>
-            <Label text="Veuillez remplir toutes les informations." wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label text="Veuillez remplir toutes les informations pour votre demande d'inscription." underline="true" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
+            <Label text="Mail :" textFill="#f50000" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </Label>
+            <Label text="Téléphone :" textFill="#f50000" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="mail" focusTraversable="false" promptText="Exemple@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="telephone" focusTraversable="false" promptText="06 39 85 68 96" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>
