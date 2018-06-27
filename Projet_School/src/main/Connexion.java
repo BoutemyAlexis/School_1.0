@@ -71,7 +71,7 @@ public class Connexion {
 		return statut;
 	}
 	
-	//Permet de récupérer l'id de connexion (auto implémenté par la bd) d'une personne
+	//Permet de récupérer l'id de connexion (auto implémenté par la bdd) d'une personne
 	public String id(String login) {
 		connect();
 		String id = null;;

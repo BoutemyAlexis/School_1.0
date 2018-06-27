@@ -115,7 +115,7 @@ public class ConnexionController extends Connexion {
 							Main.getUser().setPrenom(infosUser.get(5)); // prénom
 								
 							// si la personne est un enseignant on lui ajoute son cours
-							if(infosUser.size() > 7) {
+							if(infosUser.size() > 6) {
 								Main.getUser().setCours(infosUser.get(6));
 							}
 		 				}

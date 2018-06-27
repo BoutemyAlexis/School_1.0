@@ -24,7 +24,7 @@ public class SignInController extends Connexion {
 	@FXML private TextField password;
 	@FXML private TextField nom; 
 	@FXML private TextField prenom; 
-	@FXML private ChoiceBox<String> function; 
+	@FXML private ChoiceBox<String> fonction; 
 	
 	@FXML private Button buttonSignIn;
 	@FXML private Button buttonHome;
@@ -73,9 +73,9 @@ public class SignInController extends Connexion {
 	// méthode pour inscrire une personne
 	@FXML
 	private void signInAction(ActionEvent event) {
-		System.out.println(function.getSelectionModel().getSelectedItem());
+		System.out.println(fonction.getSelectionModel().getSelectedItem());
 		
-		if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || function.getSelectionModel().isEmpty()) {
+		if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText("Il manque des informations !");
@@ -83,13 +83,13 @@ public class SignInController extends Connexion {
 		}
 		else {
 			try {
-				signin(nom.getText(), prenom.getText(), function.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
+				signin(nom.getText(), prenom.getText(), fonction.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setHeaderText("Votre inscription a été pris en compte.");
-				alert.setContentText("Vous allez être redirigé sur la page de connexion.");
+				alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
+				alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
 				alert.showAndWait();
-				Main.changeScene("Connexion.fxml");
+				Main.changeScene("fxml/Connexion.fxml");
 			} catch (IOException e) {
 			}
 		}
@@ -99,7 +99,7 @@ public class SignInController extends Connexion {
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connexion.fxml");
+			Main.changeScene("fxml/Connexion.fxml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,7 +109,7 @@ public class SignInController extends Connexion {
 	@FXML
 	private void keyAction(KeyEvent e) {
 		if(e.getCode() == KeyCode.ENTER) {
-			if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || function.getSelectionModel().isEmpty()) {
+			if(id.getText().isEmpty() || password.getText().isEmpty() || nom.getText().isEmpty() || prenom.getText().isEmpty() || fonction.getSelectionModel().isEmpty()) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText("Il manque des informations !");
@@ -117,13 +117,13 @@ public class SignInController extends Connexion {
 			}
 			else {
 				try {
-					signin(nom.getText(), prenom.getText(), function.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
+					signin(nom.getText(), prenom.getText(), fonction.getSelectionModel().getSelectedItem(), id.getText(), password.getText());
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Information");
-					alert.setHeaderText("Votre inscription a été pris en compte.");
-					alert.setContentText("Vous allez être redirigé sur la page de connexion.");
+					alert.setHeaderText("Votre demande d'inscription a bien été pris en compte.");
+					alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
 					alert.showAndWait();
-					Main.changeScene("Connexion.fxml");
+					Main.changeScene("fxml/Connexion.fxml");
 				} catch (IOException er) {
 				}
 			}
@@ -131,7 +131,7 @@ public class SignInController extends Connexion {
 		
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
-				Main.changeScene("Connexion.fxml");
+				Main.changeScene("fxml/Connexion.fxml");
 			} catch (IOException er) {
 				er.printStackTrace();
 			}

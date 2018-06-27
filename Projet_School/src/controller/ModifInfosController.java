@@ -82,7 +82,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connected.fxml");
+			Main.changeScene("fxml/Connected.fxml");
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
@@ -98,7 +98,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 	private void keyAction(KeyEvent e) {
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
-				Main.changeScene("Connected.fxml");
+				Main.changeScene("fxml/Connected.fxml");
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
@@ -126,7 +126,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 		alert.setHeaderText("Les modifications ont été sauvegardé !");
 		alert.showAndWait();
 		try {
-			Main.changeScene("Connected.fxml");
+			Main.changeScene("fxml/Connected.fxml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

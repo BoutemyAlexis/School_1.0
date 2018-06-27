@@ -9,7 +9,6 @@ public class Utilisateur {
 	private String nom;
 	private String mail;
 	private String telephone;
-	private String fonction;
 	
 	public Utilisateur() {
 		super();
@@ -53,14 +52,6 @@ public class Utilisateur {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-	public String getFonction() {
-		return fonction;
-	}
-
-	public void setFonction(String fonction) {
-		this.fonction = fonction;
 	}
 
 	public String getIdentifiant() {
