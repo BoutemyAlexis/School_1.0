@@ -29,13 +29,14 @@ public class ModifInfosController extends Connexion implements Initializable {
 	@FXML private TextField password;
 	@FXML private TextField nom; 
 	@FXML private TextField prenom; 
-	@FXML private TextField matiere; 
-	@FXML private Label labMatiere;
+	@FXML private TextField mail; 
+	@FXML private TextField telephone; 
+	
 	@FXML private Label header;
 	
 	@FXML private Button buttonHome;
 	@FXML private Button buttonSave;
-	
+	/*
 	public void modif(String nom, String prenom, String login, String passwd) {
 		connect();
 		String sql = null;
@@ -76,13 +77,13 @@ public class ModifInfosController extends Connexion implements Initializable {
 			close();
 		}
 	}
-	
+	*/
 
 	// méthode pour retourner à la page d'accueil
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("fxml/Connected.fxml");
+			Main.changeScene("/fxml/HomeStudent.fxml");
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
@@ -98,7 +99,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 	private void keyAction(KeyEvent e) {
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
-				Main.changeScene("fxml/Connected.fxml");
+				Main.changeScene("/fxml/HomeStudent.fxml");
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
@@ -109,7 +110,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 			}
 		}
 	}
-		
+		/*
 	// méthode pour sauvegarder les changements
 	@FXML
 	private void saveAction(ActionEvent event) {
@@ -130,18 +131,23 @@ public class ModifInfosController extends Connexion implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		id.setText(Integer.toString(Main.getUser().getId()));
-		password.setText(Main.getUser().getPassword());
-		nom.setText(Main.getUser().getNom());
-		prenom.setText(Main.getUser().getPrenom());
-		
-		if(Main.getUser().getFonction().equals("Enseignant")) {
-			matiere.setVisible(true);
-			labMatiere.setVisible(true);
-			matiere.setText(Main.getUser().getCours());
+		if(Main.getEnseignant().getId() > 0) {
+			id.setText(Integer.toString(Main.getEnseignant().getId()));
+			nom.setText(Main.getEnseignant().getNom());
+			prenom.setText(Main.getEnseignant().getPrenom());
+			mail.setText(Main.getEnseignant().getMail());
+			telephone.setText(Main.getEnseignant().getTelephone());
+		}
+		if(Main.getEtudiant().getId() > 0) {
+			id.setText(Integer.toString(Main.getEtudiant().getId()));
+			nom.setText(Main.getEtudiant().getNom());
+			prenom.setText(Main.getEtudiant().getPrenom());
+			mail.setText(Main.getEtudiant().getMail());
+			telephone.setText(Main.getEtudiant().getTelephone());
 		}
 	}
+	
 }

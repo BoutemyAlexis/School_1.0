@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 27 juin 2018 à 14:50
+-- Généré le :  mer. 27 juin 2018 à 19:02
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `fonction` varchar(255) NOT NULL,
   `actif` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `compte`
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `compte` (
 INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALUES
 (1, 'admin', 'admin', 'administrateur', 1),
 (2, 'alexis', 'alex', 'etudiant', 1),
-(3, 'Damien', 'dd', 'enseignant', 1);
+(3, 'Damien', 'dd', 'enseignant', 1),
+(4, 'philippe', 'philot', 'secretaire', 1);
 
 -- --------------------------------------------------------
 
@@ -179,6 +180,13 @@ CREATE TABLE IF NOT EXISTS `secretaire` (
   `telephone` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `secretaire`
+--
+
+INSERT INTO `secretaire` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`) VALUES
+(4, 'philippe', 'Philippe', 'Perrot', 'philot@gmail.com', '0645897542');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

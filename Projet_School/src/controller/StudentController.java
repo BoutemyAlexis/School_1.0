@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,26 +26,24 @@ public class StudentController implements Initializable {
 	@FXML Button home;
 	@FXML Button infos;
 	@FXML Button cours;
-	@FXML Button planning;
 	boolean vis = false;
 	////
 	
 	@FXML private Button modif;
-	@FXML private Button notes;
+	@FXML private Button suppCompte;
 	@FXML private Button abs;
 	@FXML private Button coursLigne;
 	@FXML private Button inscris;
 	
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		Image menuIcon = new Image("icon/menu.png",40,40,false,false);
-		Image decoIcon = new Image("icon/deco.png",40,40,false,false);
+		Image menuIcon = new Image("/icons/menu.png",40,40,false,false);
+		Image decoIcon = new Image("/icons/deco.png",40,40,false,false);
 		menu.setGraphic(new ImageView(menuIcon));
 		dec.setGraphic(new ImageView(decoIcon));
 		home.setVisible(vis);
 		infos.setVisible(vis);
 		cours.setVisible(vis);
-		planning.setVisible(vis);
 		
 		modif.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
@@ -63,18 +60,18 @@ public class StudentController implements Initializable {
 			}
 		});
 				
-		notes.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		suppCompte.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				notes.setStyle("-fx-background-color: black");
-				notes.setTextFill(Color.ORANGE);
+				suppCompte.setStyle("-fx-background-color: black");
+				suppCompte.setTextFill(Color.ORANGE);
 			}
 		});
-		notes.setOnMouseExited(new EventHandler<MouseEvent>() {
+		suppCompte.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				notes.setStyle("-fx-background-color: orange");
-				notes.setTextFill(Color.BLACK);
+				suppCompte.setStyle("-fx-background-color: orange");
+				suppCompte.setTextFill(Color.BLACK);
 			}
 		});
 				
@@ -125,30 +122,28 @@ public class StudentController implements Initializable {
 	}
 	
 	// méthode pour afficher ou non le menu
-		@FXML
-		private void showMenuAction(ActionEvent event) {
-			if(vis) {
-				vis = false;
-				leftPane.setStyle("-fx-background-color: white");
-				home.setVisible(vis);
-				infos.setVisible(vis);
-				cours.setVisible(vis);
-				planning.setVisible(vis);
-			} else {
-				vis = true;
-				leftPane.setStyle("-fx-background-color: silver");
-				home.setVisible(vis);
-				infos.setVisible(vis);
-				cours.setVisible(vis);
-				planning.setVisible(vis);
-			}
+	@FXML
+	private void showMenuAction(ActionEvent event) {
+		if(vis) {
+			vis = false;
+			leftPane.setStyle("-fx-background-color: white");
+			home.setVisible(vis);
+			infos.setVisible(vis);
+			cours.setVisible(vis);
+		} else {
+			vis = true;
+			leftPane.setStyle("-fx-background-color: silver");
+			home.setVisible(vis);
+			infos.setVisible(vis);
+			cours.setVisible(vis);
 		}
+	}
 		
 		// méthode pour déconnecter la personne
 		@FXML
 		private void decoAction(ActionEvent event) {
 			try {
-				Main.changeScene("Connexion.fxml");
+				Main.changeScene("/fxml/Connexion.fxml");
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
@@ -164,7 +159,7 @@ public class StudentController implements Initializable {
 		@FXML
 		private void changeInfos(ActionEvent event) {
 			try {
-				Main.changeScene("modifInfos.fxml");
+				Main.changeScene("/fxml/ModifInfos.fxml");
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 				System.out.println("Impossible d'afficher la page de modification des infos !");
@@ -175,7 +170,7 @@ public class StudentController implements Initializable {
 		@FXML
 		private void homeAction(ActionEvent event) {
 			try {
-				Main.changeScene("Connected.fxml");
+				Main.changeScene("/fxml/Connected.fxml");
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 				System.out.println("Impossible de retourner à l'accueil !");
@@ -205,13 +200,13 @@ public class StudentController implements Initializable {
 		private void goInAction(ActionEvent event) {
 			if(event.getSource() == modif) {
 				try {
-					Main.changeScene("modifInfos.fxml");
+					Main.changeScene("/fxml/ModifInfos.fxml");
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 					System.out.println("Impossible d'afficher la page de modification des infos !");
 				}
 			}
-			if(event.getSource() == notes) {
+			if(event.getSource() == suppCompte) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText("Vous n'avez aucunes notes pour le moment");

@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 
 
 public class Main extends Application {
@@ -52,6 +53,8 @@ public class Main extends Application {
 	public static void changeScene(String sceneName) throws IOException {
 		Parent root = FXMLLoader.load(Main.class.getResource(sceneName));
 		stage.setScene(new Scene(root));
+		stage.sizeToScene(); 
+		stage.show();
 	}
 	
 	public static void main(String[] args) {

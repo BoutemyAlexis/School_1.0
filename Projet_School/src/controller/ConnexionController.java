@@ -4,17 +4,14 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.mysql.jdbc.PreparedStatement;
-
-import classes.Cours;
+import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import main.Connexion;
-import main.Main;
+import main.*;
 	 
 // le controller du fichier Connexion.fxml
 public class ConnexionController extends Connexion {
@@ -46,7 +43,7 @@ public class ConnexionController extends Connexion {
 					if((identifiant.equals(rs.getString("identifiant"))) && (mdp.equals(rs.getString("password")))){
 						b = true;
 						infosUser = con.getInfos(identifiant);
-						System.out.println("Taille AL = " + infosUser.size());
+						System.out.println("Taille de l'ArrayList contenant les informations = " + infosUser.size());
 					}
 				}
 			} catch (SQLException e) {
@@ -88,6 +85,8 @@ public class ConnexionController extends Connexion {
 		 							Main.getEtudiant().setNom(infosUser.get(4).toString());
 		 							Main.getEtudiant().setMail(infosUser.get(5).toString());
 		 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
+		 							
+		 							Main.changeScene("/fxml/HomeStudent.fxml");
 		 						}
 		 						if(fonction.equals("enseignant")|| fonction.equals("Enseigant")) {
 		 							Main.getEnseignant().setId(Integer.parseInt(infosUser.get(1).toString()));
@@ -97,6 +96,8 @@ public class ConnexionController extends Connexion {
 		 							Main.getEnseignant().setMail(infosUser.get(5).toString());
 		 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
 		 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
+		 							
+		 							Main.changeScene("/fxml/SpaceTeacher.fxml");
 		 						}
 		 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
 		 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
@@ -105,13 +106,14 @@ public class ConnexionController extends Connexion {
 		 							Main.getSecretaire().setNom(infosUser.get(4).toString());
 		 							Main.getSecretaire().setMail(infosUser.get(5).toString());
 		 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
+		 							
+		 							Main.changeScene("/fxml/Connected.fxml");
 		 						}
 		 					}
-		 					
-							Main.changeScene("/fxml/Connected.fxml");
 		 				} catch (IOException e) {
+		 					e.printStackTrace();
 							System.err.println(e.getMessage());
-							System.out.println("Impossible d'afficher la page home !");
+							System.out.println("Impossible d'afficher la page suivante !");
 		 				}
 		 			}
 				}		

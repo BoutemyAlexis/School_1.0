@@ -107,14 +107,15 @@ public class Connexion {
 		String id = null;
 		String sql2 = "";
 		int cpt = 1;
-		int max;
+		int max = 0;
 		try {
-			String sql = "SELECT * FROM compte WHERE identifiant = ?";
+			String sql = "SELECT * FROM compte WHERE identifiant = ? AND actif = 1";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, identifiant);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				fonction = rs.getString("fonction");
+				System.out.println("La personne qui se connecte est un : " + fonction);
 				id = rs.getString("id");
 				info.add(rs.getString("fonction"));
 			}
@@ -126,7 +127,7 @@ public class Connexion {
 				sql2 = "SELECT * FROM etudiant WHERE id = ?";
 				max = 6; //le nombre de colonnes dans la table etudiant
 			}
-			else {
+			if(fonction.equals("secretaire") || fonction.equals("Secretaire")) {
 				sql2 = "SELECT * FROM etudiant WHERE id = ?";
 				max = 6; // le nombre de colonnes dans la table secretaire
 			}
@@ -146,7 +147,7 @@ public class Connexion {
 				String sql3 = "SELECT * FROM cours WHERE idEnseignant = ?";
 				PreparedStatement ps3;
 				ps3 = (PreparedStatement) cn.prepareStatement(sql3);
-				ps3.setInt(1, (int) info.get(7));
+				ps3.setInt(1, Integer.parseInt(info.get(7).toString()));
 				rs3 = ps3.executeQuery();
 				Cours cours = new Cours();
 				while (rs3.next()) {
