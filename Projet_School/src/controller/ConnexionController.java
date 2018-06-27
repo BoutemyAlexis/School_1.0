@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
+
+import classes.Cours;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -17,7 +19,7 @@ import main.Main;
 // le controller du fichier Connexion.fxml
 public class ConnexionController extends Connexion {
 	
-	private ArrayList<String> infosUser = null;
+	private ArrayList<Object> infosUser = null;
 	Connexion con = new Connexion(cn);
 	
 		public ConnexionController() {
@@ -36,14 +38,15 @@ public class ConnexionController extends Connexion {
 			ResultSet rs = null;
 			Boolean b = false;
 			try {
-				String sql = "SELECT identifiant, password FROM compte WHERE login = ?";
+				String sql = "SELECT identifiant, password FROM compte WHERE identifiant = ? AND actif = 1";
 				PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 				ps.setString(1, login);
 				rs = ps.executeQuery();
 				while (rs.next()) {
 					if((login.equals(rs.getString("identifiant"))) && (mdp.equals(rs.getString("password")))){
 						b = true;
-						infosUser = con.info(login);
+						infosUser = con.getInfos(login);
+						System.out.println("Taille AL = " + infosUser.size());
 					}
 				}
 			} catch (SQLException e) {
@@ -61,7 +64,7 @@ public class ConnexionController extends Connexion {
 			// si c'est le bouton pour s'inscrire
 			if(event.getSource()== buttonSign) {
 				try {
-					Main.changeScene("fxml/SignIn.fxml");
+					Main.changeScene("/fxml/SignIn.fxml");
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 					System.out.println("Impossible d'afficher la page d'inscription !");
@@ -71,21 +74,36 @@ public class ConnexionController extends Connexion {
 				if(connexion(id.getText(), password.getText())) {	
 	 				try {
 	 					if( !(id.getText().equals("admin")) && !(password.getText().equals("admin")) ) {
-	 					// on met les infos de la bd dans l'individu utilisateur de la classe main
-							Main.getUser().setNom(infosUser.get(4)); // nom
-							Main.getUser().setPrenom(infosUser.get(5)); // prénom
-							
-							// si la personne est un enseignant on lui ajoute sa matière
-							if(infosUser.size() > 7) {
-								Main.getUser().setCours(infosUser.get(6));
-							}
+	 						String fonction = infosUser.get(0).toString();
+	 						
+	 						if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
+	 							Main.getEtudiant().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getEtudiant().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getEtudiant().setPrenom(infosUser.get(3).toString());
+	 							Main.getEtudiant().setNom(infosUser.get(4).toString());
+	 							Main.getEtudiant().setMail(infosUser.get(5).toString());
+	 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
+	 						}
+	 						if(fonction.equals("enseignant")|| fonction.equals("Enseigant")) {
+	 							Main.getEnseignant().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getEnseignant().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getEnseignant().setPrenom(infosUser.get(3).toString());
+	 							Main.getEnseignant().setNom(infosUser.get(4).toString());
+	 							Main.getEnseignant().setMail(infosUser.get(5).toString());
+	 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
+	 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
+	 						}
+	 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
+	 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getSecretaire().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getSecretaire().setPrenom(infosUser.get(3).toString());
+	 							Main.getSecretaire().setNom(infosUser.get(4).toString());
+	 							Main.getSecretaire().setMail(infosUser.get(5).toString());
+	 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
+	 						}
 	 					}
 	 					
-	 					Main.getUser().setFonction(infosUser.get(2)); // statut
-						Main.getUser().setId(Integer.parseInt(infosUser.get(0))); // id
-						Main.getUser().setPassword(infosUser.get(1)); // mdp
-						
-						Main.changeScene("Connected.fxml");
+						Main.changeScene("/fxml/Connected.fxml");
 	 				} catch (IOException e) {
 						System.err.println(e.getMessage());
 						System.out.println("Impossible d'afficher la page home !");
@@ -106,25 +124,39 @@ public class ConnexionController extends Connexion {
 					error.setVisible(true);
 					password.setText("");
 				}
-				
 				if(connexion(id.getText(), password.getText())) {	
 	 				try {
 	 					if( !(id.getText().equals("admin")) && !(password.getText().equals("admin")) ) {
-		 					// on met les infos de la bd dans l'individu utilisateur de la classe main
-							Main.getUser().setNom(infosUser.get(4)); // nom
-							Main.getUser().setPrenom(infosUser.get(5)); // prénom
-								
-							// si la personne est un enseignant on lui ajoute son cours
-							if(infosUser.size() > 6) {
-								Main.getUser().setCours(infosUser.get(6));
-							}
-		 				}
-		 					
-		 				Main.getUser().setFonction(infosUser.get(2)); // statut
-						Main.getUser().setId(Integer.parseInt(infosUser.get(0))); // id
-						Main.getUser().setPassword(infosUser.get(1)); // mdp
-						
-						Main.changeScene("fxml/Connected.fxml");
+	 						String fonction = infosUser.get(0).toString();
+	 						
+	 						if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
+	 							Main.getEtudiant().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getEtudiant().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getEtudiant().setPrenom(infosUser.get(3).toString());
+	 							Main.getEtudiant().setNom(infosUser.get(4).toString());
+	 							Main.getEtudiant().setMail(infosUser.get(5).toString());
+	 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
+	 						}
+	 						if(fonction.equals("enseignant")|| fonction.equals("Enseigant")) {
+	 							Main.getEnseignant().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getEnseignant().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getEnseignant().setPrenom(infosUser.get(3).toString());
+	 							Main.getEnseignant().setNom(infosUser.get(4).toString());
+	 							Main.getEnseignant().setMail(infosUser.get(5).toString());
+	 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
+	 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
+	 						}
+	 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
+	 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
+	 							Main.getSecretaire().setIdentifiant(infosUser.get(2).toString());
+	 							Main.getSecretaire().setPrenom(infosUser.get(3).toString());
+	 							Main.getSecretaire().setNom(infosUser.get(4).toString());
+	 							Main.getSecretaire().setMail(infosUser.get(5).toString());
+	 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
+	 						}
+	 					}
+	 					
+						Main.changeScene("/fxml/Connected.fxml");
 	 				} catch (IOException er) {
 						System.err.println(er.getMessage());
 						System.out.println("Impossible d'afficher la page home !");

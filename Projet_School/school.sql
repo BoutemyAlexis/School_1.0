@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 24 juin 2018 à 19:29
+-- Généré le :  mer. 27 juin 2018 à 14:50
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -46,12 +46,21 @@ CREATE TABLE IF NOT EXISTS `absence` (
 DROP TABLE IF EXISTS `compte`;
 CREATE TABLE IF NOT EXISTS `compte` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identifiant` int(255) NOT NULL,
-  `password` int(255) NOT NULL,
+  `identifiant` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `fonction` varchar(255) NOT NULL,
   `actif` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALUES
+(1, 'admin', 'admin', 'administrateur', 1),
+(2, 'alexis', 'alex', 'etudiant', 1),
+(3, 'Damien', 'dd', 'enseignant', 1);
 
 -- --------------------------------------------------------
 
@@ -66,7 +75,14 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `nomCours` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`idCours`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `cours`
+--
+
+INSERT INTO `cours` (`idCours`, `idEnseignant`, `nomCours`, `description`) VALUES
+(1, 3, 'Anglais', 'Cours d\'anglais pour personnes bilingues');
 
 -- --------------------------------------------------------
 
@@ -82,8 +98,16 @@ CREATE TABLE IF NOT EXISTS `enseignant` (
   `nom` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
-  `idCours` int(11) NOT NULL
+  `idCours` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `enseignant`
+--
+
+INSERT INTO `enseignant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idCours`) VALUES
+(3, 'Damien', 'Damien', 'Donnadieu', 'd.donnadieux@gmail.com', '0667894512', 1);
 
 -- --------------------------------------------------------
 
@@ -98,8 +122,16 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `prenom` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  `telephone` varchar(255) NOT NULL
+  `telephone` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `etudiant`
+--
+
+INSERT INTO `etudiant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`) VALUES
+(2, 'alexis', 'alexis', 'boutemy', 'alexis@gmail.com', '0669954852');
 
 -- --------------------------------------------------------
 
@@ -144,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `secretaire` (
   `prenom` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  `telephone` varchar(255) NOT NULL
+  `telephone` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
 

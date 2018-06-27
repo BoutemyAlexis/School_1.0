@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import classes.Cours;
+
 // la classe de connexion à la Base de données
 public class Connexion {
 	private String url = "jdbc:mysql://localhost:3306/school?useSSL=false";
@@ -49,13 +51,13 @@ public class Connexion {
 		}
 	}
 	
-	//Permet de récupérer le statut d'une personne
-	public String statut(String login) {
+	//Permet de récupérer le statut d'une personne à partir de son login
+	public String getFonction(String identifiant) {
 		connect();
 		String statut = null;;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT fonction FROM compte WHERE login = ?";
+			String sql = "SELECT fonction FROM compte WHERE identifiant = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, login);
 			rs = ps.executeQuery();
@@ -72,14 +74,15 @@ public class Connexion {
 	}
 	
 	//Permet de récupérer l'id de connexion (auto implémenté par la bdd) d'une personne
-	public String id(String login) {
+	// à partir de son login
+	public String getId(String identifiant) {
 		connect();
 		String id = null;;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT id FROM compte WHERE login = ?";
+			String sql = "SELECT id FROM compte WHERE identifiant = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
-			ps.setString(1, login);
+			ps.setString(1, identifiant);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				id = rs.getString("IdConnexion");
@@ -94,44 +97,65 @@ public class Connexion {
 	}
 	
 	//Permet de récupérer les informations d'une personne gràce à son login
-	public ArrayList<String> info(String login) {		
+	public ArrayList<Object> getInfos(String identifiant) {		
 		connect();
 		ResultSet rs = null;
 		ResultSet rs2 = null;
-		ArrayList<String> info = new ArrayList<String>();
-		String statut = null;
-		String i = null;
+		ResultSet rs3 = null;
+		ArrayList<Object> info = new ArrayList<Object>();
+		String fonction = null;
+		String id = null;
 		String sql2 = "";
 		int cpt = 1;
 		int max;
 		try {
-			String sql = "SELECT * FROM compte WHERE login = ?";
+			String sql = "SELECT * FROM compte WHERE identifiant = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
-			ps.setString(1, login);
+			ps.setString(1, identifiant);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				statut = rs.getString("statut");
-				i = rs.getString("idConnexion");
-				info.add(rs.getString("login"));
-				info.add(rs.getString("passwd"));
-				info.add(rs.getString("Statut"));
+				fonction = rs.getString("fonction");
+				id = rs.getString("id");
+				info.add(rs.getString("fonction"));
 			}
-			if(statut.equals("enseignant") || statut.equals("Enseignant")) {
-				sql2 = "SELECT * FROM enseignant WHERE Id_Connexion = ?";
-				max = 7;
+			if(fonction.equals("enseignant") || fonction.equals("Enseignant")) {
+				sql2 = "SELECT * FROM enseignant WHERE id = ?";
+				max = 7; //le nombre de colonnes dans la table enseignant
+			}
+			if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
+				sql2 = "SELECT * FROM etudiant WHERE id = ?";
+				max = 6; //le nombre de colonnes dans la table etudiant
 			}
 			else {
-				sql2 = "SELECT * FROM etudiant WHERE Id_Connexion = ?";
-				max = 4;
+				sql2 = "SELECT * FROM etudiant WHERE id = ?";
+				max = 6; // le nombre de colonnes dans la table secretaire
 			}
+			// on prépare la requête choisi au dessus
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
-			ps2.setString(1, i);
+			ps2.setString(1, id);
+			// on l'execute maintenant pour récupérer la personne
 			rs2 = ps2.executeQuery();
 			while (rs2.next()) {
 				while(cpt <= max){
 					info.add(rs2.getString(cpt));
 					cpt++;
 				}
+			}
+			if(fonction.equals("enseignant")|| fonction.equals("Enseignant")) {
+				// Pour récupérer le cours de l'enseignant
+				String sql3 = "SELECT * FROM cours WHERE idEnseignant = ?";
+				PreparedStatement ps3;
+				ps3 = (PreparedStatement) cn.prepareStatement(sql3);
+				ps3.setInt(1, (int) info.get(7));
+				rs3 = ps3.executeQuery();
+				Cours cours = new Cours();
+				while (rs3.next()) {
+					cours.setIdCours(rs3.getString("idCours"));
+					cours.setNomCours(rs3.getString("nomCours"));
+					cours.setDescription(rs3.getString("description"));
+					info.add(cours);
+				}
+				info.add(cours);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,4 +165,34 @@ public class Connexion {
 		}
 		return info;			
 	}
+	
+	public void deleteEtudiant(int id) {
+		connect();
+		try {
+			// première requete pour effacer de la table etudiant
+			String requete = "DELETE FROM etudiant WHERE id = ?";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			// deuxième requete pour effacer de la table compte
+			String requete2 = "DELETE FROM compte WHERE id = ?";
+			PreparedStatement ps2;
+			ps2 = (PreparedStatement) cn.prepareStatement(requete2);
+			ps2.setLong(1, id);
+			ResultSet rs2 = ps.executeQuery();
+			// troisième requete pour effacer de la table groupe
+			String requete3 = "DELETE FROM groupe WHERE id = ?";
+			PreparedStatement ps3;
+			ps3 = (PreparedStatement) cn.prepareStatement(requete3);
+			ps3.setLong(1, id);
+			ResultSet rs3 = ps.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
 }

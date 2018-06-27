@@ -113,7 +113,7 @@ public class ConnectedController implements Initializable {
 	}
 
 	// méthode pour afficher ou non le menu
-	@FXML
+	/*@FXML
 	private void showMenuAction(ActionEvent event) {
 		if(vis) {
 			vis = false;
@@ -145,13 +145,13 @@ public class ConnectedController implements Initializable {
 				}
 			}
 		}
-	}
+	}*/
 	
 	// méthode pour déconnecter la personne
 	@FXML
 	private void decoAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connexion.fxml");
+			Main.changeScene("/fxml/Connexion.fxml");
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
@@ -167,7 +167,7 @@ public class ConnectedController implements Initializable {
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connected.fxml");
+			Main.changeScene("/fxml/Connected.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			System.out.println("Impossible de retourner à l'accueil !");
@@ -175,7 +175,7 @@ public class ConnectedController implements Initializable {
 	}
 	
 	// méthode pour aller dans différents espaces
-	@FXML
+	/*@FXML
 	private void goInAction(ActionEvent event) {
 		if(event.getSource() == espEtudiant) {
 			if(Main.getUser().getFonction().equals("Secrétaire") || Main.getUser().getFonction().equals("Enseignant")) {
@@ -239,13 +239,13 @@ public class ConnectedController implements Initializable {
 				alert.showAndWait();
 			}
 		}
-	}
+	}*/
 	
 	// méthode pour afficher la page de modification des informations
 	@FXML
 	private void changeInfos(ActionEvent event) {
 		try {
-			Main.changeScene("modifInfos.fxml");
+			Main.changeScene("/fxml/modifInfos.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			System.out.println("Impossible d'afficher la page de modification des infos !");

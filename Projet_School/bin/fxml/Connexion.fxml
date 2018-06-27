@@ -52,7 +52,7 @@
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="error" alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="Identifiant ou mot de passe incorrect !" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Label fx:id="error" alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="Identifiant ou mot de passe incorrect ! Ou votre compte n'a pas été activé par une secrétaire." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <font>
                   <Font name="DejaVu Sans Bold" size="17.0" />
                </font>

@@ -13,7 +13,6 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Main extends Application {
 	public static Stage stage;
-	private static Utilisateur utilisateur = new Utilisateur();
 	private static Etudiant etudiant = new Etudiant();
 	private static Enseignant enseignant = new Enseignant();
 	private static Secretaire secretaire = new Secretaire();
@@ -35,10 +34,6 @@ public class Main extends Application {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 		}
-	}
-	
-	public static Utilisateur getUser() {
-		return utilisateur;
 	}
 	
 	public static Enseignant getEnseignant() {
