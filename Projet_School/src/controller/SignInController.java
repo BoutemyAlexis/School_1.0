@@ -52,12 +52,11 @@ public class SignInController extends Connexion {
 			while (rs.next()) {
 				id = rs.getString("id");
 			}
-			
 			if(fonction.equals("enseignant")) {
 				sql = "INSERT INTO enseignant (id, identifiant, prenom, nom, mail, telephone, idCours) VALUES (?,?,?,?,?,?,0)";
 			}
 			else {
-				sql = "INSERT INTO etudiant (id, identifiant, prenom, nom, mail, telephone)  VALUES (?,?,?,?,?,?)";
+				sql = "INSERT INTO etudiant (id, identifiant, prenom, nom, mail, telephone, idGroupe)  VALUES (?,?,?,?,?,?,0)";
 			}
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -88,11 +87,13 @@ public class SignInController extends Connexion {
 		else {
 			try {
 				signIn(id.getText(), password.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText(), fonction.getSelectionModel().getSelectedItem() );
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
 				alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
 				alert.showAndWait();
+				
 				Main.changeScene("/fxml/Connexion.fxml");
 			} catch (IOException e) {
 			}
@@ -123,6 +124,7 @@ public class SignInController extends Connexion {
 				try {
 					signIn(id.getText(), password.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText(), fonction.getSelectionModel().getSelectedItem() );
 					Alert alert = new Alert(AlertType.INFORMATION);
+					
 					alert.setTitle("Information");
 					alert.setHeaderText("Votre demande d'inscription a bien été pris en compte.");
 					alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");

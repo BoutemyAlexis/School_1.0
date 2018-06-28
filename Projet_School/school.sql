@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 27 juin 2018 à 19:02
+-- Généré le :  jeu. 28 juin 2018 à 15:24
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `fonction` varchar(255) NOT NULL,
   `actif` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `compte`
@@ -61,7 +61,10 @@ INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALU
 (1, 'admin', 'admin', 'administrateur', 1),
 (2, 'alexis', 'alex', 'etudiant', 1),
 (3, 'Damien', 'dd', 'enseignant', 1),
-(4, 'philippe', 'philot', 'secretaire', 1);
+(4, 'philippe', 'philot', 'secretaire', 1),
+(5, 'jo22', 'jo22', 'etudiant', 0),
+(10, 'aze', 'aze', 'etudiant', 1),
+(11, 'azer', 'azer', 'etudiant', 0);
 
 -- --------------------------------------------------------
 
@@ -124,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `nom` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
+  `idGroupe` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -131,8 +135,10 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`) VALUES
-(2, 'alexis', 'alexis', 'boutemy', 'alexis@gmail.com', '0669954852');
+INSERT INTO `etudiant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idGroupe`) VALUES
+(2, 'alexis', 'alexis', 'boutemy', 'alexis@gmail.com', '0669954852', 2),
+(10, 'aze', 'aze', 'aze', 'aze', 'aze', 0),
+(11, 'azer', 'azre', 'azrazr', 'azrarz', 'azrazr', 0);
 
 -- --------------------------------------------------------
 
@@ -144,10 +150,17 @@ DROP TABLE IF EXISTS `groupe`;
 CREATE TABLE IF NOT EXISTS `groupe` (
   `idGroupe` int(11) NOT NULL AUTO_INCREMENT,
   `mention` varchar(255) NOT NULL,
-  `idEtudiant` int(11) NOT NULL,
+  `place` int(11) NOT NULL,
   `idCours` int(11) NOT NULL,
   PRIMARY KEY (`idGroupe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `groupe`
+--
+
+INSERT INTO `groupe` (`idGroupe`, `mention`, `place`, `idCours`) VALUES
+(2, 'LEA', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -161,8 +174,16 @@ CREATE TABLE IF NOT EXISTS `seance` (
   `idCours` int(11) NOT NULL,
   `date` varchar(255) NOT NULL,
   `salle` int(60) NOT NULL,
+  `idGroupe` int(11) NOT NULL,
   PRIMARY KEY (`idSeance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `seance`
+--
+
+INSERT INTO `seance` (`idSeance`, `idCours`, `date`, `salle`, `idGroupe`) VALUES
+(1, 1, '28/06', 5, 2);
 
 -- --------------------------------------------------------
 

@@ -28,7 +28,7 @@ public class ConnexionController extends Connexion {
 		@FXML private Button buttonCon;
 		@FXML private Button buttonSign;
 		@FXML private Label error;
-		
+		@FXML private Label active;
 		
 		public boolean connexion (String identifiant, String mdp) {
 			connect();
@@ -58,6 +58,10 @@ public class ConnexionController extends Connexion {
 		// Méthode pour récupérer ce que l'utilisateur a tapé et comparé
 		@FXML
 		private void connexionAction(ActionEvent event) {
+			active.setVisible(false);
+			error.setVisible(false);
+			System.out.println(Main.getEtudiant().getId());
+			System.out.println(Main.getEnseignant().getId());
 			// si c'est le bouton pour s'inscrire
 			if(event.getSource()== buttonSign) {
 				try {
@@ -85,6 +89,7 @@ public class ConnexionController extends Connexion {
 		 							Main.getEtudiant().setNom(infosUser.get(4).toString());
 		 							Main.getEtudiant().setMail(infosUser.get(5).toString());
 		 							Main.getEtudiant().setTelephone(infosUser.get(6).toString());
+		 							Main.getEtudiant().setIdGroupe(Integer.parseInt(infosUser.get(7).toString()));
 		 							
 		 							Main.changeScene("/fxml/HomeStudent.fxml");
 		 						}
@@ -95,9 +100,10 @@ public class ConnexionController extends Connexion {
 		 							Main.getEnseignant().setNom(infosUser.get(4).toString());
 		 							Main.getEnseignant().setMail(infosUser.get(5).toString());
 		 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
+		 							Main.getEnseignant().setIdCours(Integer.parseInt(infosUser.get(7).toString()));
 		 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
 		 							
-		 							Main.changeScene("/fxml/SpaceTeacher.fxml");
+		 							Main.changeScene("/fxml/HomeTeacher.fxml");
 		 						}
 		 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {
 		 							Main.getSecretaire().setId(Integer.parseInt(infosUser.get(1).toString()));
@@ -115,6 +121,9 @@ public class ConnexionController extends Connexion {
 							System.err.println(e.getMessage());
 							System.out.println("Impossible d'afficher la page suivante !");
 		 				}
+		 			} else {
+		 				active.setVisible(true);
+						password.setText("");
 		 			}
 				}		
 			}
@@ -123,8 +132,10 @@ public class ConnexionController extends Connexion {
 		// méthode pour se connecter en appuyant sur entrer 
 		@FXML
 		private void keyAction(KeyEvent e) {
+			active.setVisible(false);
+			error.setVisible(false);
 			if(e.getCode() == KeyCode.ENTER) {
-				if(id.getText().isEmpty()) {
+				if(id.getText().isEmpty() || password.getText().isEmpty()) {
 					error.setVisible(true);
 					password.setText("");
 				}
@@ -167,7 +178,7 @@ public class ConnexionController extends Connexion {
 	 				}
 	 			}
 				else {
-					error.setVisible(true);
+					active.setVisible(true);
 					password.setText("");		
 				}
 			}

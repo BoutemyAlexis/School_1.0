@@ -125,7 +125,7 @@ public class Connexion {
 			}
 			if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
 				sql2 = "SELECT * FROM etudiant WHERE id = ?";
-				max = 6; //le nombre de colonnes dans la table etudiant
+				max = 7; //le nombre de colonnes dans la table etudiant
 			}
 			if(fonction.equals("secretaire") || fonction.equals("Secretaire")) {
 				sql2 = "SELECT * FROM etudiant WHERE id = ?";
@@ -174,20 +174,14 @@ public class Connexion {
 			String requete = "DELETE FROM etudiant WHERE id = ?";
 			PreparedStatement ps;
 			ps = (PreparedStatement) cn.prepareStatement(requete);
-			ps.setLong(1, id);
-			ResultSet rs = ps.executeQuery();
+			ps.setInt(1, id);
+			ps.executeUpdate();
 			// deuxième requete pour effacer de la table compte
 			String requete2 = "DELETE FROM compte WHERE id = ?";
 			PreparedStatement ps2;
 			ps2 = (PreparedStatement) cn.prepareStatement(requete2);
-			ps2.setLong(1, id);
-			ResultSet rs2 = ps.executeQuery();
-			// troisième requete pour effacer de la table groupe
-			String requete3 = "DELETE FROM groupe WHERE id = ?";
-			PreparedStatement ps3;
-			ps3 = (PreparedStatement) cn.prepareStatement(requete3);
-			ps3.setLong(1, id);
-			ResultSet rs3 = ps.executeQuery();
+			ps2.setInt(1, id);
+			ps2.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,4 +190,21 @@ public class Connexion {
 		}
 	}
 	
+	public void getCours(int id) {
+		connect();
+		try {
+			// requete pour récupérer les séances de l'étudiant
+			String requete = "SELECT * FROM seance";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+	}
 }

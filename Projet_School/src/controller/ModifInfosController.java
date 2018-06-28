@@ -26,49 +26,51 @@ public class ModifInfosController extends Connexion implements Initializable {
 	}
 
 	@FXML private TextField id;
-	@FXML private TextField password;
 	@FXML private TextField nom; 
 	@FXML private TextField prenom; 
 	@FXML private TextField mail; 
 	@FXML private TextField telephone; 
+	@FXML private Label groupe;
 	
+	@FXML private Label grp;
 	@FXML private Label header;
 	
 	@FXML private Button buttonHome;
 	@FXML private Button buttonSave;
-	/*
-	public void modif(String nom, String prenom, String login, String passwd) {
+	
+	// fonction pour modifier les informations
+	public void modif(int id, String identifiant, String nom, String prenom, String mail, String telephone) {
 		connect();
 		String sql = null;
 		String sql2 = null;
-		String s = null;
-		String id = null;
 		ResultSet rs = null;
+		String fonct = null;
 		try {
-			sql = "UPDATE connexion SET login = ?, passwd = ? WHERE login = ?";
+			sql = "UPDATE compte SET identifiant = ? WHERE id = ?";
 			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
-			ps.setString(1, login);
-			ps.setString(2, passwd);
-			ps.setString(3, Integer.toString(Main.getUser().getId()));
+			ps.setString(1, identifiant);
+			ps.setInt(2, id);
 			ps.executeUpdate();
-			String sql3 = "SELECT IdConnexion, statut FROM connexion WHERE login = ?";
+			String sql3 = "SELECT fonction FROM compte WHERE id = ?";
 			PreparedStatement ps3 = (PreparedStatement) cn.prepareStatement(sql3);
-			ps3.setString(1, login);
+			ps3.setInt(1, id);
 			rs = ps3.executeQuery();
 			while (rs.next()) {
-				id = rs.getString("IdConnexion");
-				s = rs.getString("statut");
+				fonct = rs.getString("fonction");
 			}
-			if (s.equals("Enseignant")) {
-				sql2 = "UPDATE enseignant SET nomEnseignant = ?, prenomEnseignant = ? WHERE Id_Connexion = ?";
+			if (fonct.equals("Enseignant")) {
+				sql2 = "UPDATE enseignant SET identifiant = ?, prenom = ?, nom = ?, mail = ?, telephone = ? WHERE id = ?";
 			}
 			else {
-				sql2 = "UPDATE etudiant SET nomEtudiant = ?, prenomEtudiant = ? WHERE Id_Connexion = ?";
+				sql2 = "UPDATE etudiant SET identifiant = ?, prenom = ?, nom = ?, mail = ?, telephone = ? WHERE id = ?";
 			}
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
-			ps2.setString(1, nom);
+			ps2.setString(1, identifiant);
 			ps2.setString(2, prenom);
-			ps2.setString(3, id);
+			ps2.setString(3, nom);
+			ps2.setString(4, mail);
+			ps2.setString(5, telephone);
+			ps2.setInt(6, id);
 			ps2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,17 +79,70 @@ public class ModifInfosController extends Connexion implements Initializable {
 			close();
 		}
 	}
-	*/
 
+	// méthode pour sauvegarder les changements
+	@FXML
+	private void saveAction(ActionEvent event) {
+		int idEtudiant = Main.getEtudiant().getId();
+		int idEnseignant = Main.getEnseignant().getId();
+		
+		if(idEtudiant > 0) {
+			// appliquer les changements dans la base de données
+			modif(idEtudiant, id.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText());
+			Main.getEtudiant().setIdentifiant(id.getText());
+			Main.getEtudiant().setPrenom(prenom.getText());
+			Main.getEtudiant().setNom(nom.getText());
+			Main.getEtudiant().setMail(mail.getText());
+			Main.getEtudiant().setTelephone(telephone.getText());
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information");
+			alert.setHeaderText("Les modifications ont été sauvegardées !");
+			alert.showAndWait();
+			
+			try {
+				Main.changeScene("/fxml/HomeStudent.fxml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(idEnseignant > 0) {
+			// appliquer les changements dans la base de données
+			modif(idEnseignant, id.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText());
+			Main.getEnseignant().setIdentifiant(id.getText());
+			Main.getEnseignant().setPrenom(prenom.getText());
+			Main.getEnseignant().setNom(nom.getText());
+			Main.getEnseignant().setMail(mail.getText());
+			Main.getEnseignant().setTelephone(telephone.getText());
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information");
+			alert.setHeaderText("Les modifications ont été sauvegardées !");
+			alert.showAndWait();
+			
+			try {
+				Main.changeScene("/fxml/HomeTeacher.fxml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	// méthode pour retourner à la page d'accueil
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("/fxml/HomeStudent.fxml");
+			if(Main.getEtudiant().getId() > 0) {
+				Main.changeScene("/fxml/HomeStudent.fxml");
+			}
+			else {
+				Main.changeScene("/fxml/HomeTeacher.fxml");
+			}
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
-			alert.setHeaderText("Les modifications n'ont pas été sauvegardé !");
+			alert.setHeaderText("Les modifications n'ont pas été sauvegardées !");
 			alert.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -99,54 +154,41 @@ public class ModifInfosController extends Connexion implements Initializable {
 	private void keyAction(KeyEvent e) {
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
-				Main.changeScene("/fxml/HomeStudent.fxml");
+				if(Main.getEtudiant().getId() > 0) {
+					Main.changeScene("/fxml/HomeStudent.fxml");
+				}
+				else {
+					Main.changeScene("/fxml/HomeTeacher.fxml");
+				}
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setHeaderText("Les modifications n'ont pas été sauvegardé !");
+				alert.setHeaderText("Les modifications n'ont pas été sauvegardées !");
 				alert.showAndWait();
 			} catch (IOException er) {
 				er.printStackTrace();
 			}
 		}
 	}
-		/*
-	// méthode pour sauvegarder les changements
-	@FXML
-	private void saveAction(ActionEvent event) {
-		// appliquer les changements dans la base de données
-		modif(nom.getText(), prenom.getText(), id.getText(), password.getText());
-		
-		Main.getUser().setId(Integer.parseInt(id.getText()));
-		Main.getUser().setPassword(password.getText());
-		Main.getUser().setNom(nom.getText());
-		Main.getUser().setPrenom(prenom.getText());
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Information");
-		alert.setHeaderText("Les modifications ont été sauvegardé !");
-		alert.showAndWait();
-		try {
-			Main.changeScene("fxml/Connected.fxml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(Main.getEnseignant().getId() > 0) {
-			id.setText(Integer.toString(Main.getEnseignant().getId()));
-			nom.setText(Main.getEnseignant().getNom());
+			id.setText(Main.getEnseignant().getIdentifiant());
 			prenom.setText(Main.getEnseignant().getPrenom());
+			nom.setText(Main.getEnseignant().getNom());
 			mail.setText(Main.getEnseignant().getMail());
 			telephone.setText(Main.getEnseignant().getTelephone());
+			groupe.setVisible(false);
+			grp.setVisible(false);
 		}
+		
 		if(Main.getEtudiant().getId() > 0) {
-			id.setText(Integer.toString(Main.getEtudiant().getId()));
-			nom.setText(Main.getEtudiant().getNom());
+			id.setText(Main.getEtudiant().getIdentifiant());
 			prenom.setText(Main.getEtudiant().getPrenom());
+			nom.setText(Main.getEtudiant().getNom());
 			mail.setText(Main.getEtudiant().getMail());
 			telephone.setText(Main.getEtudiant().getTelephone());
+			groupe.setText(Integer.toString(Main.getEtudiant().getIdGroupe()));
 		}
 	}
 	

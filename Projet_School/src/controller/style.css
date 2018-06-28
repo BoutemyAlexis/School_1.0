@@ -1,4 +1,4 @@
-.anchor {
-	-fx-background-image: url("background_image.jpg");
+.hbox {
+	-fx-background-image: url("/icons/BU.jpg");
 	-fx-background-size: 100% 100%;
 }

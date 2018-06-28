@@ -18,12 +18,13 @@
           <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="400.0" percentWidth="100.0" prefWidth="800.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <TextField fx:id="id" focusTraversable="true" onKeyPressed="#keyAction" prefHeight="40.0" prefWidth="250.0" promptText="Identifiant" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
@@ -52,7 +53,7 @@
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="error" alignment="CENTER" prefHeight="122.0" prefWidth="463.0" text="Identifiant ou mot de passe incorrect ! Ou votre compte n'a pas été activé par une secrétaire." textAlignment="CENTER" textFill="#0f10ba" visible="false" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Label fx:id="error" alignment="CENTER" prefHeight="40.0" prefWidth="500.0" text="Identifiant ou mot de passe incorrect !" textAlignment="CENTER" textFill="#0f10ba" visible="false" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <font>
                   <Font name="DejaVu Sans Bold" size="17.0" />
                </font>
@@ -65,9 +66,14 @@
                   <Insets right="200.0" />
                </GridPane.margin>
             </Label>
-            <Label focusTraversable="false" text="Identifiant : celui que vous avez saisi lors de votre inscription (votre pseudo, votre mail ou votre numéro d'étudiant)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Label focusTraversable="false" text="Identifiant : celui que vous avez saisi lors de votre inscription (votre pseudo, votre mail ou votre numéro d'étudiant)" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="active" alignment="CENTER" prefHeight="40.0" prefWidth="500.0" text="Une secrétaire doit activer votre compte !" textAlignment="CENTER" textFill="#0f10ba" visible="false" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font name="DejaVu Sans Bold" size="17.0" />
                </font>
             </Label>
          </children>

@@ -4,7 +4,7 @@ package classes;
 public class Groupe {
     private int id;
 	private String mention;
-    private Etudiant etudiant;
+    private int place;
     private Cours cours;
     
     public Groupe() {
@@ -26,20 +26,20 @@ public class Groupe {
 		this.mention = mention;
 	}
 
-	public Etudiant getEtudiant() {
-		return etudiant;
-	}
-
-	public void setEtudiant(Etudiant etudiant) {
-		this.etudiant = etudiant;
-	}
-
 	public Cours getCours() {
 		return cours;
 	}
 
 	public void setCours(Cours cours) {
 		this.cours = cours;
+	}
+
+	public int getPlace() {
+		return place;
+	}
+
+	public void setPlace(int place) {
+		this.place = place;
 	}
 	
 }

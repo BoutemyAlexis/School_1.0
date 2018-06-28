@@ -7,9 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 
 
 public class Main extends Application {
@@ -27,10 +24,6 @@ public class Main extends Application {
 			stage.setScene(new Scene(root));
 			stage.sizeToScene(); 
 			stage.show();
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Pour vous connecter à la base de données vérifiez que l'utilisateur est root et qu'il n'y a pas de mot de passe");
-			alert.showAndWait();
 		} catch(Exception e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -41,12 +34,24 @@ public class Main extends Application {
 		return enseignant;
 	}
 	
+	public static void setEnseignant(Enseignant en) {
+		enseignant = en;
+	}
+	
 	public static Etudiant getEtudiant() {
 		return etudiant;
 	}
 	
+	public static void setEtudiant(Etudiant et) {
+		etudiant = et;
+	}
+	
 	public static Secretaire getSecretaire() {
 		return secretaire;
+	}
+	
+	public static void setSecretaire(Secretaire se) {
+		secretaire = se;
 	}
 	
 	// méthode pour changer de scene 

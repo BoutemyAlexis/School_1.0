@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: silver;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="controller.SuppCompteController">
+   <children>
+      <Button fx:id="supprimer" focusTraversable="false" layoutX="550.0" layoutY="350.0" maxHeight="600.0" maxWidth="600.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#SuppAction" prefHeight="100.0" prefWidth="150.0" text="SUPPRIMER" AnchorPane.rightAnchor="200.0">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="annuler" focusTraversable="false" layoutX="250.0" layoutY="350.0" maxHeight="600.0" maxWidth="600.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#CancelAction" prefHeight="100.0" prefWidth="150.0" text="ANNULER" AnchorPane.leftAnchor="200.0">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" focusTraversable="false" layoutX="150.0" layoutY="100.0" prefHeight="100.0" prefWidth="500.0" text="Attention, si vous supprimez votre compte, toutes vos données seront effacées !" textAlignment="CENTER" textFill="#b20000" wrapText="true" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="DejaVu Sans Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
