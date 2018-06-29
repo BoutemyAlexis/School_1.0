@@ -5,7 +5,7 @@ import javafx.beans.property.StringProperty;
 
 public class Seance {
     private StringProperty id;
-    private StringProperty idCours;
+	private StringProperty idCours;
 	private StringProperty nomCours;
 	private StringProperty nomEnseignant;
     private StringProperty date;
@@ -27,54 +27,82 @@ public class Seance {
 		this.idGroupe = new SimpleStringProperty(idGroupe);
 	}
 
-	public String getId() {
+    public final String getId() {
 		return id.get();
 	}
-	public void setId(StringProperty id) {
-		this.id = id;
-	}
-	public String getDate() {
-		return date.get();
-	}
-	public void setDate(StringProperty date) {
-		this.date = date;
-	}
-	public String getSalle() {
-		return salle.get();
-	}
-	public void setSalle(StringProperty salle) {
-		this.salle = salle;
-	}
 
-	public String getIdCours() {
+	public final String getIdCours() {
 		return idCours.get();
 	}
 
-	public void setIdCours(StringProperty idCours) {
-		this.idCours = idCours;
-	}
-
-	public String getNomCours() {
+	public final String getNomCours() {
 		return nomCours.get();
 	}
 
-	public void setNomCours(StringProperty nomCours) {
-		this.nomCours = nomCours;
-	}
-
-	public String getNomEnseignant() {
+	public final String getNomEnseignant() {
 		return nomEnseignant.get();
 	}
 
-	public void setNomEnseignant(StringProperty nomEnseignant) {
+	public final  String getDate() {
+		return date.get();
+	}
+
+	public final String getSalle() {
+		return salle.get();
+	}
+
+	public final String getIdGroupe() {
+		return idGroupe.get();
+	}
+	
+	public final StringProperty idProperty() {
+		return id;
+	}
+	public final void setId(StringProperty id) {
+		this.id = id;
+	}
+	public final StringProperty dateProperty() {
+		return date;
+	}
+	public final void setDate(StringProperty date) {
+		this.date = date;
+	}
+	public final StringProperty salleProperty() {
+		return salle;
+	}
+	public final void setSalle(StringProperty salle) {
+		this.salle = salle;
+	}
+
+	public final StringProperty idCoursProperty() {
+		return idCours;
+	}
+
+	public final void setIdCours(StringProperty idCours) {
+		this.idCours = idCours;
+	}
+
+	public final StringProperty nomCoursProperty() {
+		return nomCours;
+	}
+
+	public final void setNomCours(StringProperty nomCours) {
+		this.nomCours = nomCours;
+	}
+
+	public final StringProperty nomEnseignantProperty() {
+		return nomEnseignant;
+	}
+
+	public final void setNomEnseignant(StringProperty nomEnseignant) {
 		this.nomEnseignant = nomEnseignant;
 	}
 
-	public String getIdGroupe() {
-		return idGroupe.get();
+	public final StringProperty idGroupeProperty() {
+		return idGroupe;
 	}
 
-	public void setIdGroupe(StringProperty idGroupe) {
+	public final void setIdGroupe(StringProperty idGroupe) {
 		this.idGroupe = idGroupe;
 	}
 

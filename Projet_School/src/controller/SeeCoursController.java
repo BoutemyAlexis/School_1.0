@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,25 +20,22 @@ import main.Main;
 
 public class SeeCoursController implements Initializable {
 	
-	@FXML private TableView<Seance> tableau;
-	@FXML private TableColumn<Seance, String> idS;
-	@FXML private TableColumn<Seance, String> idC;
-	@FXML private TableColumn<Seance, String> nomC;
-	@FXML private TableColumn<Seance, String> nomE;
-	@FXML private TableColumn<Seance, String> da;
-	@FXML private TableColumn<Seance, String> sa;
+	@FXML TableView<Seance> tableau;
+	@FXML TableColumn<Seance, String> idS;
+	@FXML TableColumn<Seance, String> idC;
+	@FXML TableColumn<Seance, String> nomC;
+	@FXML TableColumn<Seance, String> nomE;
+	@FXML TableColumn<Seance, String> da;
+	@FXML TableColumn<Seance, String> sa;
 	
 	@FXML Button retour;
-	private ObservableList<Seance> cours;
+	ObservableList<Seance> cours;
 	
 	@FXML
 	private void HomeAction(ActionEvent event) {
-		try {
-			Main.changeScene("/fxml/SpaceStudent.fxml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
+		
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cours = FXCollections.observableArrayList();
@@ -62,17 +58,14 @@ public class SeeCoursController implements Initializable {
 		} finally {
 			cn.close();
 		}
-		System.out.print(cours.size());
 		
-		this.tableau.setItems(cours);
+		this.idS.setCellValueFactory(new PropertyValueFactory<Seance, String>("id"));
+		this.idC.setCellValueFactory(new PropertyValueFactory<Seance, String>("idCours"));
+		this.nomC.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomCours"));
+		this.nomE.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomEnseignant"));
+		this.da.setCellValueFactory(new PropertyValueFactory<Seance, String>("date"));
+		this.sa.setCellValueFactory(new PropertyValueFactory<Seance, String>("salle"));
 		
-		this.idS.setCellValueFactory(new PropertyValueFactory<>("id"));
-		System.out.println(idS);
-		this.idC.setCellValueFactory(new PropertyValueFactory<>("idCours"));
-		this.nomC.setCellValueFactory(new PropertyValueFactory<>("nomCours"));
-		this.nomE.setCellValueFactory(new PropertyValueFactory<>("nomEnseignant"));
-		this.da.setCellValueFactory(new PropertyValueFactory<>("date"));
-		this.sa.setCellValueFactory(new PropertyValueFactory<>("salle"));
-		
+		this.tableau.setItems(this.cours);
 	}
 }
