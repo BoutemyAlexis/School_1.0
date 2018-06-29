@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 28 juin 2018 à 15:24
+-- Généré le :  ven. 29 juin 2018 à 22:46
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `absence` (
   `idAbsence` int(11) NOT NULL AUTO_INCREMENT,
   `idEtudiant` int(11) NOT NULL,
   `date` varchar(255) NOT NULL,
+  `nomEnseignant` varchar(255) NOT NULL,
   `idSeance` int(11) NOT NULL,
   PRIMARY KEY (`idAbsence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -51,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `fonction` varchar(255) NOT NULL,
   `actif` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `compte`
@@ -59,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `compte` (
 
 INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALUES
 (1, 'admin', 'admin', 'administrateur', 1),
-(2, 'alexis', 'alex', 'etudiant', 1),
-(3, 'Damien', 'dd', 'enseignant', 1),
+(2, 'alex', 'alex', 'etudiant', 1),
+(3, 'dd', 'dd', 'enseignant', 1),
 (4, 'philippe', 'philot', 'secretaire', 1),
 (5, 'jo22', 'jo22', 'etudiant', 0),
 (10, 'aze', 'aze', 'etudiant', 1),
@@ -136,8 +137,8 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 --
 
 INSERT INTO `etudiant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idGroupe`) VALUES
-(2, 'alexis', 'alexis', 'boutemy', 'alexis@gmail.com', '0669954852', 2),
-(10, 'aze', 'aze', 'aze', 'aze', 'aze', 0),
+(2, 'alex', 'boutemy', 'alexis', 'alexis@gmail.fr', '0669954852', 2),
+(10, 'aze', 'aze', 'aze', 'azefsdgsfdg', '064545465654', 2),
 (11, 'azer', 'azre', 'azrazr', 'azrarz', 'azrazr', 0);
 
 -- --------------------------------------------------------
@@ -172,18 +173,21 @@ DROP TABLE IF EXISTS `seance`;
 CREATE TABLE IF NOT EXISTS `seance` (
   `idSeance` int(11) NOT NULL AUTO_INCREMENT,
   `idCours` int(11) NOT NULL,
+  `nomCours` varchar(255) NOT NULL,
+  `nomEnseignant` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
   `salle` int(60) NOT NULL,
   `idGroupe` int(11) NOT NULL,
   PRIMARY KEY (`idSeance`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `seance`
 --
 
-INSERT INTO `seance` (`idSeance`, `idCours`, `date`, `salle`, `idGroupe`) VALUES
-(1, 1, '28/06', 5, 2);
+INSERT INTO `seance` (`idSeance`, `idCours`, `nomCours`, `nomEnseignant`, `date`, `salle`, `idGroupe`) VALUES
+(1, 1, 'Anglais', 'Donnadieu', '28/06', 5, 2),
+(2, 1, 'Anglais', 'Donnadieu', '28/06', 5, 2);
 
 -- --------------------------------------------------------
 
