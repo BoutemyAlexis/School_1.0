@@ -2,12 +2,21 @@ package classes;
 
 public class Absence {
 	private int id;
-	private Etudiant etudiant;
+	private int idEtudiant;
 	private String date;
-	private Seance seance;
+	private String nomEnseignant;
+	private int idSeance;
 	
 	public Absence() {
 		super();
+	}
+	
+	public Absence(int i, int idEtu, String da, String nomEns, int idSeance) {
+		this.id = i;
+		this.idEtudiant = idEtu;
+		this.date = da;
+		this.nomEnseignant = nomEns;
+		this.idSeance = idSeance;
 	}
 	
 	public int getId() {
@@ -18,14 +27,6 @@ public class Absence {
 		this.id = id;
 	}
 	
-	public Etudiant getEtudiant() {
-		return etudiant;
-	}
-	
-	public void setEtudiant(Etudiant etudiant) {
-		this.etudiant = etudiant;
-	}
-	
 	public String getDate() {
 		return date;
 	}
@@ -34,12 +35,29 @@ public class Absence {
 		this.date = date;
 	}
 
-	public Seance getSeance() {
-		return seance;
+
+	public int getIdEtudiant() {
+		return idEtudiant;
 	}
 
-	public void setSeance(Seance seance) {
-		this.seance = seance;
+	public void setIdEtudiant(int idEtudiant) {
+		this.idEtudiant = idEtudiant;
+	}
+
+	public String getNomEnseignant() {
+		return nomEnseignant;
+	}
+
+	public void setNomEnseignant(String nomEnseignant) {
+		this.nomEnseignant = nomEnseignant;
+	}
+
+	public int getIdSeance() {
+		return idSeance;
+	}
+
+	public void setIdSeance(int idSeance) {
+		this.idSeance = idSeance;
 	}
 	
 }

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import com.mysql.jdbc.PreparedStatement;
 
 import classes.Cours;
+import classes.Seance;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 // la classe de connexion à la Base de données
 public class Connexion {
@@ -190,21 +193,27 @@ public class Connexion {
 		}
 	}
 	
-	public void getCours(int id) {
+	public ObservableList<Seance> getCours(int idGrp) {
 		connect();
+		ObservableList<Seance> cours = FXCollections.observableArrayList();
 		try {
 			// requete pour récupérer les séances de l'étudiant
-			String requete = "SELECT * FROM seance";
+			String requete = "SELECT * FROM seance WHERE idGroupe = ?";
 			PreparedStatement ps;
 			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, idGrp);
 			ResultSet rs = ps.executeQuery();
-			
+			while(rs.next()) {
+				// on récupère les infos de la séance
+				cours.add(new Seance(Integer.toString(rs.getInt("idSeance")), Integer.toString(rs.getInt("idCours")), rs.getString("nomCours"), rs.getString("nomEnseignant"), rs.getString("date"), Integer.toString(rs.getInt("salle")), Integer.toString(rs.getInt("idGroupe"))));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		
+		System.out.println("coucou");
+		return cours;
 	}
 }

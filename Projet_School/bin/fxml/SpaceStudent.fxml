@@ -79,7 +79,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="coursLigne" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Consulter mes cours en ligne" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="coursLigne" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#CoursAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Consulter mes cours en ligne" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Black" size="24.0" />
                            </font>

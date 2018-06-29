@@ -149,6 +149,17 @@ public class StudentController implements Initializable {
 		}
 	}
 		
+	@FXML
+	private void CoursAction(ActionEvent e) {
+		try {
+			Main.changeScene("/fxml/SeeCours.fxml");
+		} catch (IOException et) {
+			System.err.println(et.getMessage());
+			et.printStackTrace();
+			System.out.println("Impossible d'afficher la page des cours !");
+		}
+	}
+	
 		// méthode pour déconnecter la personne
 		@FXML
 		private void decoAction(ActionEvent event) {
@@ -205,6 +216,7 @@ public class StudentController implements Initializable {
 					Main.changeScene("/fxml/ModifInfos.fxml");
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
+					e.printStackTrace();
 					System.out.println("Impossible d'afficher la page de modification des infos !");
 				}
 			}
@@ -224,15 +236,6 @@ public class StudentController implements Initializable {
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 					System.out.println("Impossible d'afficher la page des absences !");
-				}
-			}
-			
-			if(event.getSource() == coursLigne) {
-				try {
-					Main.changeScene("/fxml/SeeCours.fxml");
-				} catch (IOException e) {
-					System.err.println(e.getMessage());
-					System.out.println("Impossible d'afficher la page des cours !");
 				}
 			}
 			
