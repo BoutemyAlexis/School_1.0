@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 29 juin 2018 à 22:46
+-- Généré le :  sam. 30 juin 2018 à 14:10
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -32,11 +32,20 @@ DROP TABLE IF EXISTS `absence`;
 CREATE TABLE IF NOT EXISTS `absence` (
   `idAbsence` int(11) NOT NULL AUTO_INCREMENT,
   `idEtudiant` int(11) NOT NULL,
+  `nomEtudiant` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
   `nomEnseignant` varchar(255) NOT NULL,
   `idSeance` int(11) NOT NULL,
   PRIMARY KEY (`idAbsence`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `absence`
+--
+
+INSERT INTO `absence` (`idAbsence`, `idEtudiant`, `nomEtudiant`, `date`, `nomEnseignant`, `idSeance`) VALUES
+(1, 2, 'alexis', '28/06', 'Donnadieu', 1),
+(2, 10, 'aze', '28/06', 'Donnadieu', 1);
 
 -- --------------------------------------------------------
 
@@ -51,8 +60,9 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `password` varchar(255) NOT NULL,
   `fonction` varchar(255) NOT NULL,
   `actif` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `identifiant` (`identifiant`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `compte`
@@ -65,7 +75,8 @@ INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALU
 (4, 'philippe', 'philot', 'secretaire', 1),
 (5, 'jo22', 'jo22', 'etudiant', 0),
 (10, 'aze', 'aze', 'etudiant', 1),
-(11, 'azer', 'azer', 'etudiant', 0);
+(11, 'azer', 'azer', 'etudiant', 0),
+(15, 'azert', 'aze', 'enseignant', 0);
 
 -- --------------------------------------------------------
 
@@ -112,7 +123,8 @@ CREATE TABLE IF NOT EXISTS `enseignant` (
 --
 
 INSERT INTO `enseignant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idCours`) VALUES
-(3, 'Damien', 'Damien', 'Donnadieu', 'd.donnadieux@gmail.com', '0667894512', 1);
+(3, 'Damien', 'Damien', 'Donnadieu', 'd.donnadieux@gmail.com', '0667894512', 1),
+(15, 'azert', 'sdf', 'gdf', 'gsdfgd', 'gdfsg', 0);
 
 -- --------------------------------------------------------
 

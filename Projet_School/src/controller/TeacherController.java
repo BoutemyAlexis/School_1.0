@@ -156,6 +156,7 @@ public class TeacherController implements Initializable {
 			alert.showAndWait();
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible de vous déconnecter !");
 		}
 	}
@@ -167,6 +168,7 @@ public class TeacherController implements Initializable {
 			Main.changeScene("/fxml/ModifInfos.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible d'afficher la page de modification des infos !");
 		}
 	}
@@ -178,6 +180,7 @@ public class TeacherController implements Initializable {
 			Main.changeScene("/fxml/HomeTeacher.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible de retourner à l'accueil !");
 		}
 	}
@@ -190,12 +193,19 @@ public class TeacherController implements Initializable {
 				Main.changeScene("/fxml/ModifInfos.fxml");
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
+				e.printStackTrace();
 				System.out.println("Impossible d'afficher la page de modification des infos !");
 			}
 		}
 		
 		if(event.getSource() == ModifCours) {
-			
+			try {
+				Main.changeScene("/fxml/ModifCours.fxml");
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace();
+				System.out.println("Impossible d'afficher la page de modification du cours !");
+			}
 		}
 		
 		if(event.getSource() == abs) {
@@ -206,7 +216,13 @@ public class TeacherController implements Initializable {
 		}
 		
 		if(event.getSource() == voirCours) {
-
+			try {
+				Main.changeScene("/fxml/SeeCours.fxml");
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println(e.getMessage());
+				System.out.println("Impossible d'afficher la page pour voir les cours !");
+			}
 		}
 		
 		if(event.getSource() == inscrit) {

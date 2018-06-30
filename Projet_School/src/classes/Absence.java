@@ -3,19 +3,21 @@ package classes;
 public class Absence {
 	private int id;
 	private int idEtudiant;
-	private String date;
+	private String nomEtudiant;
 	private String nomEnseignant;
+	private String date;
 	private int idSeance;
 	
 	public Absence() {
 		super();
 	}
 	
-	public Absence(int i, int idEtu, String da, String nomEns, int idSeance) {
+	public Absence(int i, int idEtu, String nomEt, String nomEns, String da, int idSeance) {
 		this.id = i;
 		this.idEtudiant = idEtu;
-		this.date = da;
+		this.nomEtudiant = nomEt;
 		this.nomEnseignant = nomEns;
+		this.date = da;
 		this.idSeance = idSeance;
 	}
 	
@@ -58,6 +60,14 @@ public class Absence {
 
 	public void setIdSeance(int idSeance) {
 		this.idSeance = idSeance;
+	}
+
+	public String getNomEtudiant() {
+		return nomEtudiant;
+	}
+
+	public void setNomEtudiant(String nomEtudiant) {
+		this.nomEtudiant = nomEtudiant;
 	}
 	
 }

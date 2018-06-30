@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import classes.Administrateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,107 +30,59 @@ public class AdminController implements Initializable {
 	private boolean vis = false;
 	////
 	
-	@FXML private Button addAgent;
-	@FXML private Button modifAgent;
-	@FXML private Button addCours;
-	@FXML private Button suppCours;
-	@FXML private Button addExam;
-	@FXML private Button suppExam;
+	@FXML private Button AddUser;
+	@FXML private Button ModifUser;
+	@FXML private Button SuppUser;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		Image menuIcon = new Image("icon/menu.png",40,40,false,false);
-		Image decoIcon = new Image("icon/deco.png",40,40,false,false);
+		Image menuIcon = new Image("/icons/menu.png",40,40,false,false);
+		Image decoIcon = new Image("/icons/deco.png",40,40,false,false);
 		menu.setGraphic(new ImageView(menuIcon));
 		dec.setGraphic(new ImageView(decoIcon));
 		home.setVisible(vis);
 		
-		addAgent.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		AddUser.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addAgent.setStyle("-fx-background-color: black");
-				addAgent.setTextFill(Color.ORANGE);
+				AddUser.setStyle("-fx-background-color: black");
+				AddUser.setTextFill(Color.SILVER);
 			}
 		});
-		addAgent.setOnMouseExited(new EventHandler<MouseEvent>() {
+		AddUser.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addAgent.setStyle("-fx-background-color: orange");
-				addAgent.setTextFill(Color.BLACK);
-			}
-		});
-		
-		modifAgent.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				modifAgent.setStyle("-fx-background-color: black");
-				modifAgent.setTextFill(Color.ORANGE);
-			}
-		});
-		modifAgent.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				modifAgent.setStyle("-fx-background-color: orange");
-				modifAgent.setTextFill(Color.BLACK);
+				AddUser.setStyle("-fx-background-color: silver");
+				AddUser.setTextFill(Color.BLACK);
 			}
 		});
 		
-		addCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		ModifUser.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addCours.setStyle("-fx-background-color: black");
-				addCours.setTextFill(Color.ORANGE);
+				ModifUser.setStyle("-fx-background-color: black");
+				ModifUser.setTextFill(Color.SILVER);
 			}
 		});
-		addCours.setOnMouseExited(new EventHandler<MouseEvent>() {
+		ModifUser.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addCours.setStyle("-fx-background-color: orange");
-				addCours.setTextFill(Color.BLACK);
-			}
-		});
-		
-		suppCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				suppCours.setStyle("-fx-background-color: black");
-				suppCours.setTextFill(Color.ORANGE);
-			}
-		});
-		suppCours.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				suppCours.setStyle("-fx-background-color: orange");
-				suppCours.setTextFill(Color.BLACK);
+				ModifUser.setStyle("-fx-background-color: silver");
+				ModifUser.setTextFill(Color.BLACK);
 			}
 		});
 		
-		addExam.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		SuppUser.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addExam.setStyle("-fx-background-color: black");
-				addExam.setTextFill(Color.ORANGE);
+				SuppUser.setStyle("-fx-background-color: black");
+				SuppUser.setTextFill(Color.SILVER);
 			}
 		});
-		addExam.setOnMouseExited(new EventHandler<MouseEvent>() {
+		SuppUser.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addExam.setStyle("-fx-background-color: orange");
-				addExam.setTextFill(Color.BLACK);
-			}
-		});
-		
-		suppExam.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				suppExam.setStyle("-fx-background-color: black");
-				suppExam.setTextFill(Color.ORANGE);
-			}
-		});
-		suppExam.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				suppExam.setStyle("-fx-background-color: orange");
-				suppExam.setTextFill(Color.BLACK);
+				SuppUser.setStyle("-fx-background-color: silver");
+				SuppUser.setTextFill(Color.BLACK);
 			}
 		});
 	}
@@ -138,11 +92,9 @@ public class AdminController implements Initializable {
 	private void showMenuAction(ActionEvent event) {
 		if(vis) {
 			vis = false;
-			leftPane.setStyle("-fx-background-color: white");
 			home.setVisible(vis);
 		} else {
 			vis = true;
-			leftPane.setStyle("-fx-background-color: silver");
 			home.setVisible(vis);
 		}
 	}
@@ -151,7 +103,9 @@ public class AdminController implements Initializable {
 	@FXML
 	private void decoAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connexion.fxml");		
+			Main.changeScene("/fxml/Connexion.fxml");
+			Main.setAdmin(new Administrateur());
+			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText("Vous avez été déconnecté avec succès");
@@ -166,55 +120,34 @@ public class AdminController implements Initializable {
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("Connected.fxml");
+			Main.changeScene("/fxml/SpaceAdmin.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			System.out.println("Impossible de retourner à l'accueil !");
 		}
 	}
 	
-	// méthode pour aller dans différents espaces
+	// méthode pour ajouter un utilisateur
 	@FXML
-	private void goInAction(ActionEvent event) {
-		if(event.getSource() == addAgent) {
-			try {
-				Main.changeScene("modifInfos.fxml");
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				System.out.println("Impossible d'afficher la page de création des infos !");
-			}
-		}
-		if(event.getSource() == modifAgent) {
-			try {
-				Main.changeScene("modifInfos.fxml");
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				System.out.println("Impossible d'afficher la page de création des infos !");
-			}
-		}
-		if(event.getSource() == addCours) {
-			// ajouter fonction ouvrir un fichier
-			FileChooser fc = new FileChooser();
-		    fc.setTitle("Choisi un fichier");
-		    File selectedFile = fc.showOpenDialog(null);
-		}
-		if(event.getSource() == suppCours) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Disponible prochainement.");
-			alert.showAndWait();
-		}
-		if(event.getSource() == addExam) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Ce n'est pas la période des examens");
-			alert.showAndWait();
-		}
-		if(event.getSource() == suppExam) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Il n'y a pas d'examens à supprimer");
-			alert.showAndWait();
-		}
+	private void AddAction(ActionEvent event) {
+		
+		
+		
 	}
+	
+	// méthode pour modifer un utilisateur
+	@FXML
+	private void ModifAction(ActionEvent event) {
+		
+		
+		
+	}
+	
+	// méthode pour supprimer un utilisateur
+	@FXML
+	private void SuppAction(ActionEvent event) {
+		
+		
+		
+	}	
 }

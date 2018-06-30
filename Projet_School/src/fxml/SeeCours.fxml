@@ -15,14 +15,6 @@
          </font>
       </Label>
       <TableView fx:id="tableau" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-        <columns>
-            <TableColumn id="idS" editable="false" prefWidth="50.0" text="ID de la séance" />
-            <TableColumn id="idC" editable="false" prefWidth="50.0" text="ID du cours" />
-            <TableColumn id="nomC" editable="false" prefWidth="75.0" text="Nom du cours" />
-            <TableColumn id="nomEt" editable="false" prefWidth="75.0" text="Nom enseignant" />
-          	<TableColumn id="da" editable="false" prefWidth="75.0" text="Date" />
-          	<TableColumn id="sa" editable="false" prefWidth="50.0" text="Salle" />
-        </columns>
       </TableView>
       <Button fx:id="retour" focusTraversable="false" layoutX="350.0" layoutY="600.0" mnemonicParsing="false" onAction="#HomeAction" prefHeight="50.0" prefWidth="100.0" text="Retour" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="350.0">
          <font>

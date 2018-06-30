@@ -2,9 +2,7 @@ package main;
 	
 import java.io.IOException;
 import java.net.URL;
-
 import classes.*;
-import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -18,6 +16,7 @@ public class Main extends Application {
 	private static Etudiant etudiant = new Etudiant();
 	private static Enseignant enseignant = new Enseignant();
 	private static Secretaire secretaire = new Secretaire();
+	private static Administrateur admin = new Administrateur();
 	
 	@Override
 	public void start(Stage primaryStage) {                 
@@ -57,6 +56,15 @@ public class Main extends Application {
 	public static void setSecretaire(Secretaire se) {
 		secretaire = se;
 	}
+	
+	public static Administrateur getAdmin() {
+		return admin;
+	}
+
+	public static void setAdmin(Administrateur admin) {
+		Main.admin = admin;
+	}
+	
 	
 	// méthode pour changer de scene 
 	public static void changeScene(String sceneName) throws IOException {

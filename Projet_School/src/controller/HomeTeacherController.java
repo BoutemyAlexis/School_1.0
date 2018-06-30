@@ -86,6 +86,7 @@ public class HomeTeacherController implements Initializable {
 			alert.showAndWait();
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible de vous déconnecter !");
 		}
 	}
@@ -97,7 +98,7 @@ public class HomeTeacherController implements Initializable {
 			Main.changeScene("/fxml/ModifInfos.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
-			System.out.println("Impossible de retourner à l'accueil !");
+			e.printStackTrace();
 		}
 	}
 	
@@ -108,6 +109,7 @@ public class HomeTeacherController implements Initializable {
 			Main.changeScene("/fxml/HomeTeacher.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible de retourner à l'accueil !");
 		}
 	}
@@ -119,6 +121,7 @@ public class HomeTeacherController implements Initializable {
 			Main.changeScene("/fxml/SpaceTeacher.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			System.out.println("Impossible d'afficher la page de l'espace personnel !");
 		}
 	}

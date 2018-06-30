@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import classes.Absence;
 import classes.Cours;
 import classes.Seance;
 import javafx.collections.FXCollections;
@@ -134,6 +135,10 @@ public class Connexion {
 				sql2 = "SELECT * FROM etudiant WHERE id = ?";
 				max = 6; // le nombre de colonnes dans la table secretaire
 			}
+			if(fonction.equals("administrateur") || fonction.equals("Administrateur")) {
+				sql2 = "SELECT * FROM compte WHERE id = ?";
+				max = 3;
+			}
 			// on prépare la requête choisi au dessus
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
 			ps2.setString(1, id);
@@ -204,7 +209,7 @@ public class Connexion {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				// on récupère les infos de la séance
-				//cours.add(new Seance(Integer.toString(rs.getInt("idSeance")), Integer.toString(rs.getInt("idCours")), rs.getString("nomCours"), rs.getString("nomEnseignant"), rs.getString("date"), Integer.toString(rs.getInt("salle")), Integer.toString(rs.getInt("idGroupe"))));
+				cours.add(new Seance(Integer.toString(rs.getInt("idSeance")), Integer.toString(rs.getInt("idCours")), rs.getString("nomCours"), rs.getString("nomEnseignant"), rs.getString("date"), Integer.toString(rs.getInt("salle")), Integer.toString(rs.getInt("idGroupe"))));
 			}
 			
 		} catch (SQLException e) {
@@ -212,7 +217,30 @@ public class Connexion {
 		} finally {
 			close();
 		}
-		System.out.println("coucou");
 		return cours;
 	}
+	
+	public ObservableList<Absence> getAbs(int idEtudiant) {
+		connect();
+		ObservableList<Absence> abs = FXCollections.observableArrayList();
+		try {
+			// requete pour récupérer les absences de l'étudiant
+			String requete = "SELECT * FROM absence WHERE idEtudiant= ?";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, idEtudiant);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				// on récupère les infos de la séance
+				abs.add(new Absence(rs.getInt("idAbsence"), rs.getInt("idEtudiant"), rs.getString("nomEtudiant"), rs.getString("nomEnseignant"), rs.getString("date"), rs.getInt("idSeance")) );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return abs;
+	}
+	
 }

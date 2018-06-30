@@ -79,9 +79,16 @@ public class ConnexionController extends Connexion {
 				else {
 					if(connexion(id.getText(), password.getText())) {	
 		 				try {
-		 					if( !(id.getText().equals("admin")) && !(password.getText().equals("admin")) ) {
+		 					if( !(id.getText().equals("ad")) && !(password.getText().equals("ad")) ) {
 		 						String fonction = infosUser.get(0).toString();
 		 						
+		 						if(fonction.equals("administrateur") || fonction.equals("Administrateur")) {
+		 							Main.getAdmin().setId(Integer.parseInt(infosUser.get(1).toString()));
+		 							Main.getAdmin().setIdentifiant(infosUser.get(2).toString());
+		 							Main.getAdmin().setPassword(infosUser.get(3).toString());
+		 							
+		 							Main.changeScene("/fxml/SpaceAdmin.fxml");
+		 						}
 		 						if(fonction.equals("etudiant") || fonction.equals("Etudiant")) {
 		 							Main.getEtudiant().setId(Integer.parseInt(infosUser.get(1).toString()));
 		 							Main.getEtudiant().setIdentifiant(infosUser.get(2).toString());
