@@ -2,25 +2,26 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import main.Connexion;
-import main.Main;
+import main.*;
 
-public class AddUserController extends Connexion {
+public class AddUserController implements Initializable {
 	@FXML private TextField id;
 	@FXML private TextField password;
 	@FXML private TextField nom; 
@@ -33,22 +34,11 @@ public class AddUserController extends Connexion {
 	@FXML private Button buttonHome;
 	public boolean unique = true;
 	
-	// constructeur obligatoire car classe fille de Connexion
-	public AddUserController(Connection cn) {
-		super(cn);
-	}
-	
-	// la méthode qui va démarrer la page avec les différents composants avec du texte 
-	/*public void initialize(URL location, ResourceBundle resources) {
-		if(Main.getAdmin().getId() > 0) {
-			fonction.getItems().add("secretaire");
-		}
-	}*/
-	
 	// méthode pour créer un utilisateur
 	public void signIn(String identifiant, String password, String nom, String prenom, String mail, String telephone, String fonction) {
 		unique = true;
-		connect();
+		Connexion cn = new Connexion(null);
+		cn.connect();
 		ResultSet rs = null;
 		String sql = null;
 		String sql2 = null;
@@ -56,13 +46,13 @@ public class AddUserController extends Connexion {
 		try {
 			// on met NULL pour la colonne qui est auto_increment dans la bdd
 			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,1)";
-			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
+			PreparedStatement ps2 = (PreparedStatement) cn.getConnection().prepareStatement(sql2);
 			ps2.setString(1, identifiant);
 			ps2.setString(2, password);
 			ps2.setString(3, fonction);
 			ps2.executeUpdate();
 			String sql3 = "SELECT id FROM compte WHERE identifiant = ?";
-			PreparedStatement ps3 = (PreparedStatement) cn.prepareStatement(sql3);
+			PreparedStatement ps3 = (PreparedStatement) cn.getConnection().prepareStatement(sql3);
 			ps3.setString(1, identifiant);
 			rs = ps3.executeQuery();
 			while (rs.next()) {
@@ -77,7 +67,7 @@ public class AddUserController extends Connexion {
 			if(fonction.equals("secretaire")) {
 				sql = "INSERT INTO secretaire (id, identifiant, prenom, nom, mail, telephone)  VALUES (?,?,?,?,?,?)";
 			}
-			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(sql);
+			PreparedStatement ps = (PreparedStatement) cn.getConnection().prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setString(2, identifiant);
 			ps.setString(3, prenom);
@@ -90,7 +80,7 @@ public class AddUserController extends Connexion {
 			unique = false;
 		}
 		finally {
-			close();
+			cn.close();
 		}
 	}
 	
@@ -191,5 +181,12 @@ public class AddUserController extends Connexion {
 			} catch (IOException e) {
 			}
 		}
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+		if(Main.getAdmin().getId() > 0) {
+			fonction.getItems().add("secretaire");
+		}
+		
 	}
 }

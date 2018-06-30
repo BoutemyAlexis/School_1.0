@@ -5,12 +5,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import classes.Secretaire;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import main.Main;
 
 public class SecretaireController implements Initializable {
@@ -30,8 +36,113 @@ public class SecretaireController implements Initializable {
 	@FXML private Button AddCours;
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		Image menuIcon = new Image("/icons/menu.png",40,40,false,false);
+		Image decoIcon = new Image("/icons/deco.png",40,40,false,false);
+		menu.setGraphic(new ImageView(menuIcon));
+		dec.setGraphic(new ImageView(decoIcon));
+		home.setVisible(vis);
+		absence.setVisible(vis);
+		cours.setVisible(vis);
+		DropShadow shadow = new DropShadow();
+		shadow.setOffsetX(3);
+		shadow.setOffsetY(3);
+		shadow.setRadius(10);
+		AddUser.setEffect(shadow);
+		suppCompte.setEffect(shadow);
+		abs.setEffect(shadow);
+		coursLigne.setEffect(shadow);
+		compte.setEffect(shadow);
+		AddCours.setEffect(shadow);
 		
+		AddUser.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				AddUser.setStyle("-fx-background-color: black");
+				AddUser.setTextFill(Color.SILVER);
+			}
+		});
+		AddUser.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				AddUser.setStyle("-fx-background-color: silver");
+				AddUser.setTextFill(Color.BLACK);
+			}
+		});
 		
+		AddCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				AddCours.setStyle("-fx-background-color: black");
+				AddCours.setTextFill(Color.SILVER);
+			}
+		});
+		AddCours.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				AddCours.setStyle("-fx-background-color: silver");
+				AddCours.setTextFill(Color.BLACK);
+			}
+		});
+		
+		suppCompte.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				suppCompte.setStyle("-fx-background-color: black");
+				suppCompte.setTextFill(Color.SILVER);
+			}
+		});
+		suppCompte.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				suppCompte.setStyle("-fx-background-color: silver");
+				suppCompte.setTextFill(Color.BLACK);
+			}
+		});
+				
+		abs.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				abs.setStyle("-fx-background-color: black");
+				abs.setTextFill(Color.SILVER);
+			}
+		});
+		abs.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				abs.setStyle("-fx-background-color: silver");
+				abs.setTextFill(Color.BLACK);
+			}
+		});
+				
+		coursLigne.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				coursLigne.setStyle("-fx-background-color: black");
+				coursLigne.setTextFill(Color.SILVER);
+			}
+		});
+		coursLigne.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				coursLigne.setStyle("-fx-background-color: silver");
+				coursLigne.setTextFill(Color.BLACK);
+			}
+		});
+				
+		compte.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				compte.setStyle("-fx-background-color: black");
+				compte.setTextFill(Color.SILVER);
+			}
+		});
+		compte.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				compte.setStyle("-fx-background-color: silver");
+				compte.setTextFill(Color.BLACK);
+			}
+		});
 		
 	}
 
@@ -117,6 +228,7 @@ public class SecretaireController implements Initializable {
 			Main.changeScene("/fxml/AddUser.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
