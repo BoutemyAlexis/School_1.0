@@ -132,7 +132,7 @@ public class Connexion {
 				max = 7; //le nombre de colonnes dans la table etudiant
 			}
 			if(fonction.equals("secretaire") || fonction.equals("Secretaire")) {
-				sql2 = "SELECT * FROM etudiant WHERE id = ?";
+				sql2 = "SELECT * FROM secretaire WHERE id = ?";
 				max = 6; // le nombre de colonnes dans la table secretaire
 			}
 			if(fonction.equals("administrateur") || fonction.equals("Administrateur")) {
@@ -197,6 +197,29 @@ public class Connexion {
 		}
 	}
 	
+	public void deleteSecretaire(int id) {
+		connect();
+		try {
+			// première requete pour effacer de la table secretaire
+			String requete = "DELETE FROM secretaire WHERE id = ?";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			// deuxième requete pour effacer de la table compte
+			String requete2 = "DELETE FROM compte WHERE id = ?";
+			PreparedStatement ps2;
+			ps2 = (PreparedStatement) cn.prepareStatement(requete2);
+			ps2.setInt(1, id);
+			ps2.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
 	public ObservableList<Seance> getCours(int idGrp) {
 		connect();
 		ObservableList<Seance> cours = FXCollections.observableArrayList();
@@ -220,6 +243,51 @@ public class Connexion {
 		return cours;
 	}
 	
+	public ObservableList<Seance> getTeacherCours(int idCours) {
+		connect();
+		ObservableList<Seance> cours = FXCollections.observableArrayList();
+		try {
+			// requete pour récupérer les séances de l'enseignant
+			String requete = "SELECT * FROM seance WHERE idCours = ?";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, idCours);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				// on récupère les infos de la séance
+				cours.add(new Seance(Integer.toString(rs.getInt("idSeance")), Integer.toString(rs.getInt("idCours")), rs.getString("nomCours"), rs.getString("nomEnseignant"), rs.getString("date"), Integer.toString(rs.getInt("salle")), Integer.toString(rs.getInt("idGroupe"))));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return cours;
+	}
+	
+	public ObservableList<Seance> getAllCours() {
+		connect();
+		ObservableList<Seance> cours = FXCollections.observableArrayList();
+		try {
+			// requete pour récupérer toutes les séances
+			String requete = "SELECT * FROM seance";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				// on récupère les infos de chaque séances
+				cours.add(new Seance(Integer.toString(rs.getInt("idSeance")), Integer.toString(rs.getInt("idCours")), rs.getString("nomCours"), rs.getString("nomEnseignant"), rs.getString("date"), Integer.toString(rs.getInt("salle")), Integer.toString(rs.getInt("idGroupe"))));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return cours;
+	}
+	
 	public ObservableList<Absence> getAbs(int idEtudiant) {
 		connect();
 		ObservableList<Absence> abs = FXCollections.observableArrayList();
@@ -231,7 +299,7 @@ public class Connexion {
 			ps.setInt(1, idEtudiant);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				// on récupère les infos de la séance
+				// on récupère les infos de l'absence
 				abs.add(new Absence(rs.getInt("idAbsence"), rs.getInt("idEtudiant"), rs.getString("nomEtudiant"), rs.getString("nomEnseignant"), rs.getString("date"), rs.getInt("idSeance")) );
 			}
 			
@@ -243,4 +311,25 @@ public class Connexion {
 		return abs;
 	}
 	
+	public ObservableList<Absence> getAllAbs() {
+		connect();
+		ObservableList<Absence> abs = FXCollections.observableArrayList();
+		try {
+			// requete pour récupérer les absences de l'étudiant
+			String requete = "SELECT * FROM absence";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				// on récupère les infos de chaque absences
+				abs.add(new Absence(rs.getInt("idAbsence"), rs.getInt("idEtudiant"), rs.getString("nomEtudiant"), rs.getString("nomEnseignant"), rs.getString("date"), rs.getInt("idSeance")) );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return abs;
+	}
 }

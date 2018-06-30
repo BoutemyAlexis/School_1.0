@@ -211,7 +211,7 @@ public class TeacherController implements Initializable {
 		if(event.getSource() == abs) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
-			alert.setHeaderText("Vous n'avez jamais été absent");
+			alert.setHeaderText("Pas encore accessible !");
 			alert.showAndWait();
 		}
 		

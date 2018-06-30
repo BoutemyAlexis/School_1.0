@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="Projet_School/src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Damien/Downloads/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Damien/Downloads/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/ddonn/git/School_1.0/Projet_School/mysql-connector-java-5.1.46-bin.jar"/>
 	<classpathentry kind="output" path="Projet_School/bin"/>
 </classpath>

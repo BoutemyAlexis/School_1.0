@@ -33,27 +33,66 @@ public class SeeCoursController implements Initializable {
 	
 	@FXML
 	private void HomeAction(ActionEvent event) {
-		try {
-			Main.changeScene("/fxml/SpaceStudent.fxml");
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			System.out.println("Impossible de retourner à l'accueil !");
+		if(Main.getEtudiant().getId() > 0) {
+			try {
+				Main.changeScene("/fxml/SpaceStudent.fxml");
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				System.out.println("Impossible de retourner à l'accueil !");
+			}
+		}
+		if(Main.getEnseignant().getId() > 0) {
+			try {
+				Main.changeScene("/fxml/SpaceTeacher.fxml");
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				System.out.println("Impossible de retourner à l'accueil !");
+			}
+		}
+		if(Main.getSecretaire().getId() > 0) {
+			try {
+				Main.changeScene("/fxml/SpaceSecretaire.fxml");
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				System.out.println("Impossible de retourner à l'accueil !");
+			}
 		}
 	}
 		
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cours = FXCollections.observableArrayList();
-		int idGrp = Main.getEtudiant().getIdGroupe();
 		Connexion cn = new Connexion(null);
-		cours = cn.getCours(idGrp);
 		
-		if(cours.size() == 0) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Vous n'avez aucuns cours pour le moment !");
-			alert.showAndWait();
+		if(Main.getEtudiant().getId() > 0) {
+			int idGrp = Main.getEtudiant().getIdGroupe();
+			cours = cn.getCours(idGrp);
+			if(cours.size() == 0) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Vous n'avez aucuns cours pour le moment !");
+				alert.showAndWait();
+			}
 		}
-
+		if(Main.getEnseignant().getIdCours() > 0) {
+			int idCours = Main.getEnseignant().getIdCours();
+			cours = cn.getTeacherCours(idCours);
+			if(cours.size() == 0) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Vous n'avez aucuns cours pour le moment !");
+				alert.showAndWait();
+			}
+		}
+		if(Main.getSecretaire().getId() > 0) {
+			cours = cn.getAllCours();
+			if(cours.size() == 0) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Il n'y a aucunes séances de cours !");
+				alert.showAndWait();
+			}
+		}
+		
 	    this.idS.setCellValueFactory(new PropertyValueFactory<Seance, String>("id"));
 	    this.idC.setCellValueFactory(new PropertyValueFactory<Seance, String>("idCours"));
 	    this.nomC.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomCours"));
