@@ -138,16 +138,22 @@ public class AdminController implements Initializable {
 	// méthode pour modifer un utilisateur
 	@FXML
 	private void ModifAction(ActionEvent event) {
-		
-		
-		
+		try {
+			Main.changeScene("/fxml/Cours.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	// méthode pour supprimer un utilisateur
 	@FXML
 	private void SuppAction(ActionEvent event) {
-		
-		
-		
+		try {
+			Main.changeScene("/fxml/SeeEtudiants.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}	
 }

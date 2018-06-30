@@ -18,6 +18,16 @@ public class Utilisateur {
 		this.fonction = fo;
 	}
 	
+	public Utilisateur(int i, String id, String prenom, String nom, String mail, String telephone, String fo) {
+		this.id = i;
+		this.identifiant = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.mail = mail;
+		this.telephone = telephone;
+		this.fonction = fo;
+	}
+	
 	public Utilisateur() {
 		super();
 	}

@@ -217,8 +217,12 @@ public class SecretaireController implements Initializable {
 	// méthode pour voir les comptes non activés
 	@FXML
 	private void CompteAction(ActionEvent event) {
-		
-		
+		try {
+			Main.changeScene("/fxml/NonActifs.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	// méthode pour ajouter un utilisateur (eleve ou enseignant)
@@ -235,15 +239,22 @@ public class SecretaireController implements Initializable {
 	// méthode pour ajouter un cours
 	@FXML
 	private void AddCoursAction(ActionEvent event) {
-			
-		
+		try {
+			Main.changeScene("/fxml/Cours.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 		
 	// méthode pour supprimer un utilisateur (eleve)
 	@FXML
 	private void SuppAction(ActionEvent event) {
-		
-		
-		
+		try {
+			Main.changeScene("/fxml/SeeEtudiants.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

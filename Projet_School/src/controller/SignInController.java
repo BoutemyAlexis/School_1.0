@@ -41,7 +41,7 @@ public class SignInController extends Connexion {
 		String id = null;
 		try {
 			// on met NULL pour la colonne qui est auto_increment dans la bdd
-			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,1)";
+			sql2 = "INSERT INTO compte (id, identifiant, password, fonction, actif) VALUES (NULL,?,?,?,0)";
 			PreparedStatement ps2 = (PreparedStatement) cn.prepareStatement(sql2);
 			ps2.setString(1, identifiant);
 			ps2.setString(2, password);

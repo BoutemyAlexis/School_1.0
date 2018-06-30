@@ -193,6 +193,29 @@ public class Connexion {
 		}
 	}
 	
+	public void deleteEnseignant(int id) {
+		connect();
+		try {
+			// première requete pour effacer de la table etudiant
+			String requete = "DELETE FROM enseignant WHERE id = ?";
+			PreparedStatement ps;
+			ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			// deuxième requete pour effacer de la table compte
+			String requete2 = "DELETE FROM compte WHERE id = ?";
+			PreparedStatement ps2;
+			ps2 = (PreparedStatement) cn.prepareStatement(requete2);
+			ps2.setInt(1, id);
+			ps2.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+	
 	public void deleteSecretaire(int id) {
 		connect();
 		try {
@@ -348,5 +371,81 @@ public class Connexion {
 			close();
 		}
 		return users;
+	}
+	
+	// fonction pour récupérer tous les étudiants
+	public ObservableList<Utilisateur> getStudents() {
+		connect();
+		ObservableList<Utilisateur> users = FXCollections.observableArrayList();
+		try {
+			String requete = "SELECT * FROM etudiant";
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			String fonction = "etudiant";
+			while(rs.next()) {
+				users.add(new Utilisateur(rs.getInt("id"), rs.getString("identifiant"), rs.getString("prenom"), rs.getString("nom"), rs.getString("mail"), rs.getString("telephone"), fonction));
+			}
+				
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return users;
+	}
+	
+	// fonction pour récupérer toutes les secretaires
+	public ObservableList<Utilisateur> getSecretaires() {
+		connect();
+		ObservableList<Utilisateur> users = FXCollections.observableArrayList();
+		try {
+			String requete = "SELECT * FROM secretaire";
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			String fonction = "secretaire";
+			while(rs.next()) {
+				users.add(new Utilisateur(rs.getInt("id"), rs.getString("identifiant"), rs.getString("prenom"), rs.getString("nom"), rs.getString("mail"), rs.getString("telephone"), fonction));
+			}
+				
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return users;
+	}
+	
+	// fonction pour récupérer tous les profs
+	public ObservableList<Utilisateur> getEnseignants() {
+		connect();
+		ObservableList<Utilisateur> users = FXCollections.observableArrayList();
+		try {
+			String requete = "SELECT * FROM enseignant WHERE idCours = 0";
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			String fonction = "enseignant";
+			while(rs.next()) {
+				users.add(new Utilisateur(rs.getInt("id"), rs.getString("identifiant"), rs.getString("prenom"), rs.getString("nom"), rs.getString("mail"), rs.getString("telephone"), fonction));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return users;
+	}
+	
+	public void Activer(int id) {
+		connect();
+		try {
+			String requete="UPDATE compte SET actif = 1 WHERE id = ?";
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(requete);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 	}
 }
