@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 30 juin 2018 à 14:10
+-- Généré le :  sam. 30 juin 2018 à 20:59
 -- Version du serveur :  5.7.21-log
 -- Version de PHP :  5.6.35
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `actif` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `identifiant` (`identifiant`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `compte`
@@ -73,10 +73,9 @@ INSERT INTO `compte` (`id`, `identifiant`, `password`, `fonction`, `actif`) VALU
 (2, 'alex', 'alex', 'etudiant', 1),
 (3, 'dd', 'dd', 'enseignant', 1),
 (4, 'philippe', 'philot', 'secretaire', 1),
-(5, 'jo22', 'jo22', 'etudiant', 0),
 (10, 'aze', 'aze', 'etudiant', 1),
-(11, 'azer', 'azer', 'etudiant', 0),
-(15, 'azert', 'aze', 'enseignant', 0);
+(20, 'fgh', 'fgh', 'etudiant', 1),
+(21, 'qsd', 'qsd', 'enseignant', 1);
 
 -- --------------------------------------------------------
 
@@ -124,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `enseignant` (
 
 INSERT INTO `enseignant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idCours`) VALUES
 (3, 'Damien', 'Damien', 'Donnadieu', 'd.donnadieux@gmail.com', '0667894512', 1),
-(15, 'azert', 'sdf', 'gdf', 'gsdfgd', 'gdfsg', 0);
+(21, 'qsd', 'gfdg', 'dfg', 'fdg', 'dfg', 0);
 
 -- --------------------------------------------------------
 
@@ -151,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 INSERT INTO `etudiant` (`id`, `identifiant`, `prenom`, `nom`, `mail`, `telephone`, `idGroupe`) VALUES
 (2, 'alex', 'boutemy', 'alexis', 'alexis@gmail.fr', '0669954852', 2),
 (10, 'aze', 'aze', 'aze', 'azefsdgsfdg', '064545465654', 2),
-(11, 'azer', 'azre', 'azrazr', 'azrarz', 'azrazr', 0);
+(20, 'fgh', 'fgh', 'fgh', 'fgh', 'gh', 0);
 
 -- --------------------------------------------------------
 
