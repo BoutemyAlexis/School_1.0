@@ -28,8 +28,8 @@
           <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="nom" focusTraversable="false" promptText="Espagnol" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <TextField fx:id="desc" focusTraversable="false" prefHeight="60.0" promptText="Facultatif*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="nom" promptText="Espagnol" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <TextField fx:id="desc" prefHeight="60.0" promptText="Facultatif*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Nom du cours :" textFill="#f50000" GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -73,7 +73,7 @@
                </padding>
             </Label>
             <TextField fx:id="id" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="enseignant" focusTraversable="false" promptText="Dupont" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="enseignant" promptText="Dupont" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

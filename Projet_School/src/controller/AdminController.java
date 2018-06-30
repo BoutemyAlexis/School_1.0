@@ -28,7 +28,6 @@ public class AdminController implements Initializable {
 	////
 	
 	@FXML private Button AddUser;
-	@FXML private Button ModifUser;
 	@FXML private Button SuppUser;
 	
 	public void initialize(URL location, ResourceBundle resources) {
@@ -50,21 +49,6 @@ public class AdminController implements Initializable {
 			public void handle(MouseEvent event) {
 				AddUser.setStyle("-fx-background-color: silver");
 				AddUser.setTextFill(Color.BLACK);
-			}
-		});
-		
-		ModifUser.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				ModifUser.setStyle("-fx-background-color: black");
-				ModifUser.setTextFill(Color.SILVER);
-			}
-		});
-		ModifUser.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				ModifUser.setStyle("-fx-background-color: silver");
-				ModifUser.setTextFill(Color.BLACK);
 			}
 		});
 		
@@ -129,17 +113,6 @@ public class AdminController implements Initializable {
 	private void AddAction(ActionEvent event) {
 		try {
 			Main.changeScene("/fxml/AddUser.fxml");
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	// méthode pour modifer un utilisateur
-	@FXML
-	private void ModifAction(ActionEvent event) {
-		try {
-			Main.changeScene("/fxml/Cours.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();

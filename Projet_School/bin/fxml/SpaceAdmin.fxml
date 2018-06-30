@@ -53,15 +53,7 @@
                               <Font name="Arial Black" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="ModifUser" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#ModifAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Modifier un utilisateur" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Arial Black" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="SuppUser" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#SuppAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Supprimer un utilisateur" wrapText="true" GridPane.rowIndex="1">
+                        <Button fx:id="SuppUser" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#SuppAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Supprimer un utilisateur" wrapText="true" GridPane.columnIndex="1">
                            <font>
                               <Font name="Arial Black" size="24.0" />
                            </font>

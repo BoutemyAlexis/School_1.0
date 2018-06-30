@@ -33,8 +33,8 @@
           <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="nom" focusTraversable="false" promptText="John" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <TextField fx:id="prenom" focusTraversable="false" promptText="Smith" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="nom" promptText="John" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <TextField fx:id="prenom" promptText="Smith" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Nom :" textFill="#f50000" GridPane.halignment="RIGHT" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -86,7 +86,7 @@
                </padding>
             </Label>
             <TextField fx:id="id" focusTraversable="true" promptText="mail ou pseudo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="password" focusTraversable="false" promptText="Exemple" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="password" promptText="Exemple" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="fonction" focusTraversable="false" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <items>
                   <FXCollections fx:factory="observableArrayList">
@@ -116,8 +116,8 @@
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <TextField fx:id="mail" focusTraversable="false" promptText="Exemple@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="telephone" focusTraversable="false" promptText="06 39 85 68 96" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="mail" promptText="Exemple@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="telephone" promptText="06 39 85 68 96" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>
