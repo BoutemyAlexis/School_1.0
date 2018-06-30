@@ -120,7 +120,7 @@ public class ConnexionController extends Connexion {
 		 							Main.getSecretaire().setMail(infosUser.get(5).toString());
 		 							Main.getSecretaire().setTelephone(infosUser.get(6).toString());
 		 							
-		 							Main.changeScene("/fxml/Connected.fxml");
+		 							Main.changeScene("/fxml/HomeSecretaire.fxml");
 		 						}
 		 					}
 		 				} catch (IOException e) {

@@ -30,7 +30,7 @@
                         <Font name="Arial Black" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cours" focusTraversable="false" layoutY="120.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" text="Mes cours">
+                  <Button fx:id="cours" focusTraversable="false" layoutY="120.0" mnemonicParsing="false" onAction="#CoursAction" prefHeight="60.0" prefWidth="200.0" text="Mes cours">
                      <font>
                         <Font name="Arial Black" size="14.0" />
                      </font>

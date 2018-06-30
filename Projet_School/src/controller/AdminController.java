@@ -1,10 +1,8 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import classes.Administrateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import main.Main;
 
 public class AdminController implements Initializable {
@@ -130,9 +127,12 @@ public class AdminController implements Initializable {
 	// méthode pour ajouter un utilisateur
 	@FXML
 	private void AddAction(ActionEvent event) {
-		
-		
-		
+		try {
+			Main.changeScene("/fxml/AddUser.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	// méthode pour modifer un utilisateur

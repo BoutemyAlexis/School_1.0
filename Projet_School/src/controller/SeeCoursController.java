@@ -69,7 +69,7 @@ public class SeeCoursController implements Initializable {
 			if(cours.size() == 0) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setHeaderText("Vous n'avez aucuns cours pour le moment !");
+				alert.setHeaderText("Vous n'avez aucun cours pour le moment !");
 				alert.showAndWait();
 			}
 		}
@@ -79,7 +79,7 @@ public class SeeCoursController implements Initializable {
 			if(cours.size() == 0) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setHeaderText("Vous n'avez aucuns cours pour le moment !");
+				alert.setHeaderText("Vous n'avez aucun cours pour le moment !");
 				alert.showAndWait();
 			}
 		}
@@ -88,7 +88,7 @@ public class SeeCoursController implements Initializable {
 			if(cours.size() == 0) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setHeaderText("Il n'y a aucunes séances de cours !");
+				alert.setHeaderText("Il n'y a aucune séance de cours !");
 				alert.showAndWait();
 			}
 		}

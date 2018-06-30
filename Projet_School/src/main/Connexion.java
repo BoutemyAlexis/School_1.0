@@ -2,12 +2,8 @@ package main;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 import com.mysql.jdbc.PreparedStatement;
-
-import classes.Absence;
-import classes.Cours;
-import classes.Seance;
+import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -331,5 +327,26 @@ public class Connexion {
 			close();
 		}
 		return abs;
+	}
+	
+	// fonction pour récupérer les gens qui n'ont pas de compte activés
+	public ObservableList<Utilisateur> getUserNonActif() {
+		connect();
+		ObservableList<Utilisateur> users = FXCollections.observableArrayList();
+		try {
+			// requete pour récupérer tous les utilisateurs non inscrit
+			String requete = "SELECT * FROM compte WHERE actif = 0";
+			PreparedStatement ps = (PreparedStatement) cn.prepareStatement(requete);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				users.add(new Utilisateur(rs.getInt("id"), rs.getString("identifiant"), rs.getString("password"), rs.getString("fonction")));
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return users;
 	}
 }

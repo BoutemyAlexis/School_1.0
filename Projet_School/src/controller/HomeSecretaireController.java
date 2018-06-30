@@ -3,7 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import classes.Enseignant;
+import classes.Secretaire;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,24 +19,25 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import main.Main;
 
-public class HomeTeacherController implements Initializable {
-
+public class HomeSecretaireController implements Initializable {
 	@FXML AnchorPane leftPane;
 	@FXML Button menu;
 	@FXML Button dec;
 	@FXML Button home;
-	@FXML Button infos;
+	@FXML Button cours;
+	@FXML Button absence;
 	boolean vis = false;
 	@FXML Button espace;
 	
-	// méthode qui va initialiser la page avec les photos et le menu
-	public void initialize(URL location, ResourceBundle resources) {
+	
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		Image menuIcon = new Image("/icons/menu.png",40,40,false,false);
 		Image decoIcon = new Image("/icons/deco.png",40,40,false,false);
 		menu.setGraphic(new ImageView(menuIcon));
 		dec.setGraphic(new ImageView(decoIcon));
 		home.setVisible(vis);
-		infos.setVisible(vis);
+		cours.setVisible(vis);
+		absence.setVisible(vis);
 		DropShadow shadow = new DropShadow();
 		shadow.setOffsetX(3);
 		shadow.setOffsetY(3);
@@ -58,18 +59,20 @@ public class HomeTeacherController implements Initializable {
 			}
 		});
 	}
-	
+
 	// méthode pour afficher ou non le menu
 	@FXML
 	private void showMenuAction(ActionEvent event) {
 		if(vis) {
 			vis = false;
 			home.setVisible(vis);
-			infos.setVisible(vis);
+			cours.setVisible(vis);
+			absence.setVisible(vis);
 		} else {
 			vis = true;
 			home.setVisible(vis);
-			infos.setVisible(vis);
+			cours.setVisible(vis);
+			absence.setVisible(vis);
 		}
 	}
 	
@@ -78,7 +81,7 @@ public class HomeTeacherController implements Initializable {
 	private void decoAction(ActionEvent event) {
 		try {
 			Main.changeScene("/fxml/Connexion.fxml");
-			Main.setEnseignant(new Enseignant());
+			Main.setSecretaire(new Secretaire());
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
@@ -91,22 +94,11 @@ public class HomeTeacherController implements Initializable {
 		}
 	}
 	
-	// méthode pour afficher la page de modification des informations
-	@FXML
-	private void changeInfos(ActionEvent event) {
-		try {
-			Main.changeScene("/fxml/ModifInfos.fxml");
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
 	// méthode pour retourner à l'accueil
 	@FXML
 	private void homeAction(ActionEvent event) {
 		try {
-			Main.changeScene("/fxml/HomeTeacher.fxml");
+			Main.changeScene("/fxml/HomeSecretaire.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -118,11 +110,35 @@ public class HomeTeacherController implements Initializable {
 	@FXML
 	private void goToEspace(ActionEvent event) {
 		try {
-			Main.changeScene("/fxml/SpaceTeacher.fxml");
+			Main.changeScene("/fxml/SpaceSecretaire.fxml");
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			System.out.println("Impossible d'afficher la page de l'espace personnel !");
+		}
+	}
+	
+	// méthode pour voir les cours
+	@FXML
+	private void CoursAction(ActionEvent e) {
+		try {
+			Main.changeScene("/fxml/SeeCours.fxml");
+		} catch (IOException et) {
+			System.err.println(et.getMessage());
+			et.printStackTrace();
+			System.out.println("Impossible d'afficher la page des cours !");
+		}
+	}
+	
+	// méthode pour voir les absences
+	@FXML
+	private void AbsAction(ActionEvent e) {
+		try {
+			Main.changeScene("/fxml/SeeAbs.fxml");
+		} catch (IOException et) {
+			System.err.println(et.getMessage());
+			et.printStackTrace();
+			System.out.println("Impossible d'afficher la page des absences !");
 		}
 	}
 }

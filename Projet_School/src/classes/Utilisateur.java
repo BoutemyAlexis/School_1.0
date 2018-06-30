@@ -9,6 +9,14 @@ public class Utilisateur {
 	private String nom;
 	private String mail;
 	private String telephone;
+	private String fonction;
+	
+	public Utilisateur(int i, String id, String pw, String fo) {
+		this.id = i;
+		this.identifiant = id;
+		this.password = pw;
+		this.fonction = fo;
+	}
 	
 	public Utilisateur() {
 		super();
@@ -68,6 +76,14 @@ public class Utilisateur {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
 	}
 	
 }

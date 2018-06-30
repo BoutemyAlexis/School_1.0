@@ -149,6 +149,7 @@ public class StudentController implements Initializable {
 		}
 	}
 		
+	// méthode pour voir les cours
 	@FXML
 	private void CoursAction(ActionEvent e) {
 		try {
@@ -160,91 +161,82 @@ public class StudentController implements Initializable {
 		}
 	}
 	
-		// méthode pour déconnecter la personne
-		@FXML
-		private void decoAction(ActionEvent event) {
-			try {
-				Main.changeScene("/fxml/Connexion.fxml");
-				Main.setEtudiant(new Etudiant());
+	// méthode pour déconnecter la personne
+	@FXML
+	private void decoAction(ActionEvent event) {
+		try {
+			Main.changeScene("/fxml/Connexion.fxml");
+			Main.setEtudiant(new Etudiant());
 				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information");
-				alert.setHeaderText("Vous avez été déconnecté avec succès");
-				alert.showAndWait();
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				System.out.println("Impossible de vous déconnecter !");
-			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information");
+			alert.setHeaderText("Vous avez été déconnecté avec succès");
+			alert.showAndWait();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			System.out.println("Impossible de vous déconnecter !");
 		}
+	}
 		
-		// méthode pour afficher la page de modification des informations
-		@FXML
-		private void changeInfos(ActionEvent event) {
+	// méthode pour afficher la page de modification des informations
+	@FXML
+	private void changeInfos(ActionEvent event) {
+		try {
+			Main.changeScene("/fxml/ModifInfos.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			System.out.println("Impossible d'afficher la page de modification des infos !");
+		}
+	}
+		
+	// méthode pour retourner à l'accueil
+	@FXML
+	private void homeAction(ActionEvent event) {
+		try {
+			Main.changeScene("/fxml/HomeStudent.fxml");
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			System.out.println("Impossible de retourner à l'accueil !");
+		}
+	}
+		
+	// méthode pour aller dans différents espaces
+	@FXML
+	private void goInAction(ActionEvent event) {
+		if(event.getSource() == modif) {
 			try {
 				Main.changeScene("/fxml/ModifInfos.fxml");
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
+				e.printStackTrace();
 				System.out.println("Impossible d'afficher la page de modification des infos !");
 			}
 		}
-		
-		// méthode pour retourner à l'accueil
-		@FXML
-		private void homeAction(ActionEvent event) {
+		if(event.getSource() == suppCompte) {
 			try {
-				Main.changeScene("/fxml/HomeStudent.fxml");
+				Main.changeScene("/fxml/SuppCompte.fxml");
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
-				System.out.println("Impossible de retourner à l'accueil !");
+				e.printStackTrace();
+				System.out.println("Impossible d'afficher la page de suppression de compte !");
 			}
 		}
-		
-		// méthode pour afficher la page des cours
-		@FXML
-		private void coursAction(ActionEvent event) {
+			
+		if(event.getSource() == abs) {
+			try {
+				Main.changeScene("/fxml/SeeAbs.fxml");
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				System.out.println("Impossible d'afficher la page des absences !");
+			}
+		}
+			
+		if(event.getSource() == inscris) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
-			alert.setHeaderText("Vous n'avez aucuns cours à télécharger");
+			alert.setHeaderText("Vous êtes bien inscrit !");
+			alert.setContentText("Votre paiement a été accepté et la secrétaire a activé votre compte.");
 			alert.showAndWait();
 		}
-		
-		// méthode pour aller dans différents espaces
-		@FXML
-		private void goInAction(ActionEvent event) {
-			if(event.getSource() == modif) {
-				try {
-					Main.changeScene("/fxml/ModifInfos.fxml");
-				} catch (IOException e) {
-					System.err.println(e.getMessage());
-					e.printStackTrace();
-					System.out.println("Impossible d'afficher la page de modification des infos !");
-				}
-			}
-			if(event.getSource() == suppCompte) {
-				try {
-					Main.changeScene("/fxml/SuppCompte.fxml");
-				} catch (IOException e) {
-					System.err.println(e.getMessage());
-					e.printStackTrace();
-					System.out.println("Impossible d'afficher la page de suppression de compte !");
-				}
-			}
-			
-			if(event.getSource() == abs) {
-				try {
-					Main.changeScene("/fxml/SeeAbs.fxml");
-				} catch (IOException e) {
-					System.err.println(e.getMessage());
-					System.out.println("Impossible d'afficher la page des absences !");
-				}
-			}
-			
-			if(event.getSource() == inscris) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information");
-				alert.setHeaderText("Vous êtes bien inscrit !");
-				alert.setContentText("Votre paiement a été accepté et la secrétaire a activé votre compte.");
-				alert.showAndWait();
-			}
-		}
+	}
 }

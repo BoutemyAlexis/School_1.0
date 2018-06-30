@@ -199,12 +199,20 @@ public class TeacherController implements Initializable {
 		}
 		
 		if(event.getSource() == ModifCours) {
-			try {
-				Main.changeScene("/fxml/ModifCours.fxml");
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				e.printStackTrace();
-				System.out.println("Impossible d'afficher la page de modification du cours !");
+			if(Main.getEnseignant().getIdCours() == 0) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Vous n'avez aucun cours attribué pour le moment !");
+				alert.showAndWait();
+			}
+			else {
+				try {
+					Main.changeScene("/fxml/ModifCours.fxml");
+				} catch (IOException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+					System.out.println("Impossible d'afficher la page de modification du cours !");
+				}
 			}
 		}
 		
