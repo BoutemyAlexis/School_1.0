@@ -30,8 +30,10 @@ public class SignInController extends Connexion {
 	
 	@FXML private Button buttonSignIn;
 	@FXML private Button buttonHome;
+	public boolean unique = true;
 	
 	public void signIn(String identifiant, String password, String nom, String prenom, String mail, String telephone, String fonction) {
+		unique = true;
 		connect();
 		ResultSet rs = null;
 		String sql = null;
@@ -68,6 +70,7 @@ public class SignInController extends Connexion {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			unique = false;
 		}
 		finally {
 			close();
@@ -88,13 +91,22 @@ public class SignInController extends Connexion {
 			try {
 				signIn(id.getText(), password.getText(), prenom.getText(), nom.getText(), mail.getText(), telephone.getText(), fonction.getSelectionModel().getSelectedItem() );
 				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information");
-				alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
-				alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
-				alert.showAndWait();
-				
-				Main.changeScene("/fxml/Connexion.fxml");
+				if(unique) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information");
+					alert.setHeaderText("Votre demande d'inscription a bien été prise en compte.");
+					alert.setContentText("Une secrétaire va traiter votre demande et vous allez être redirigé sur la page de connexion.");
+					alert.showAndWait();
+					
+					Main.changeScene("/fxml/Connexion.fxml");
+				}
+				else {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information");
+					alert.setHeaderText("Inscription impossible !");
+					alert.setContentText("Cet identifiant est déjà utilisé, veuillez en choisir un autre !");
+					alert.showAndWait();
+				}
 			} catch (IOException e) {
 			}
 		}

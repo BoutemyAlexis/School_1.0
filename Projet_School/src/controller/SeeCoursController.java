@@ -58,14 +58,22 @@ public class SeeCoursController implements Initializable {
 		} finally {
 			cn.close();
 		}
+		System.out.print(cours.get(0).getId());
+		System.out.print(cours.get(0).getIdCours());
+		System.out.print(cours.get(0).getNomCours());
+		System.out.print(cours.get(0).getNomEnseignant());
+		System.out.print(cours.get(0).getDate());
+		System.out.println(cours.get(0).getSalle());
 		
-		this.idS.setCellValueFactory(new PropertyValueFactory<Seance, String>("id"));
-		this.idC.setCellValueFactory(new PropertyValueFactory<Seance, String>("idCours"));
-		this.nomC.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomCours"));
-		this.nomE.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomEnseignant"));
-		this.da.setCellValueFactory(new PropertyValueFactory<Seance, String>("date"));
-		this.sa.setCellValueFactory(new PropertyValueFactory<Seance, String>("salle"));
 		
-		this.tableau.setItems(this.cours);
+		idS.setCellValueFactory(new PropertyValueFactory<Seance, String>("id"));
+		idC.setCellValueFactory(new PropertyValueFactory<Seance, String>("idCours"));
+		nomC.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomCours"));
+		nomE.setCellValueFactory(new PropertyValueFactory<Seance, String>("nomEnseignant"));
+		da.setCellValueFactory(new PropertyValueFactory<Seance, String>("date"));
+		sa.setCellValueFactory(new PropertyValueFactory<Seance, String>("salle"));
+		
+		
+		tableau.setItems(cours);
 	}
 }

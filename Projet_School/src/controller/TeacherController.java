@@ -31,10 +31,10 @@ public class TeacherController implements Initializable {
 	////
 	
 	@FXML private Button modifInfos;
-	@FXML private Button addCours;
+	@FXML private Button ModifCours;
 	@FXML private Button abs;
-	@FXML private Button suppCours;
-	@FXML private Button inscris;
+	@FXML private Button voirCours;
+	@FXML private Button inscrit;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		Image menuIcon = new Image("/icons/menu.png",40,40,false,false);
@@ -48,10 +48,10 @@ public class TeacherController implements Initializable {
 		shadow.setOffsetY(3);
 		shadow.setRadius(10);
 		modifInfos.setEffect(shadow);
-		addCours.setEffect(shadow);
+		ModifCours.setEffect(shadow);
 		abs.setEffect(shadow);
-		suppCours.setEffect(shadow);
-		inscris.setEffect(shadow);
+		voirCours.setEffect(shadow);
+		inscrit.setEffect(shadow);
 		
 		modifInfos.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
@@ -68,18 +68,18 @@ public class TeacherController implements Initializable {
 			}
 		});
 		
-		addCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		ModifCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addCours.setStyle("-fx-background-color: black");
-				addCours.setTextFill(Color.SILVER);
+				ModifCours.setStyle("-fx-background-color: black");
+				ModifCours.setTextFill(Color.SILVER);
 			}
 		});
-		addCours.setOnMouseExited(new EventHandler<MouseEvent>() {
+		ModifCours.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				addCours.setStyle("-fx-background-color: silver");
-				addCours.setTextFill(Color.BLACK);
+				ModifCours.setStyle("-fx-background-color: silver");
+				ModifCours.setTextFill(Color.BLACK);
 			}
 		});
 				
@@ -98,33 +98,33 @@ public class TeacherController implements Initializable {
 			}
 		});
 		
-		suppCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		voirCours.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				suppCours.setStyle("-fx-background-color: black");
-				suppCours.setTextFill(Color.SILVER);
+				voirCours.setStyle("-fx-background-color: black");
+				voirCours.setTextFill(Color.SILVER);
 			}
 		});
-		suppCours.setOnMouseExited(new EventHandler<MouseEvent>() {
+		voirCours.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				suppCours.setStyle("-fx-background-color: silver");
-				suppCours.setTextFill(Color.BLACK);
+				voirCours.setStyle("-fx-background-color: silver");
+				voirCours.setTextFill(Color.BLACK);
 			}
 		});
 				
-		inscris.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		inscrit.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				inscris.setStyle("-fx-background-color: black");
-				inscris.setTextFill(Color.SILVER);
+				inscrit.setStyle("-fx-background-color: black");
+				inscrit.setTextFill(Color.SILVER);
 			}
 		});
-		inscris.setOnMouseExited(new EventHandler<MouseEvent>() {
+		inscrit.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				inscris.setStyle("-fx-background-color: silver");
-				inscris.setTextFill(Color.BLACK);
+				inscrit.setStyle("-fx-background-color: silver");
+				inscrit.setTextFill(Color.BLACK);
 			}
 		});
 	}
@@ -194,7 +194,7 @@ public class TeacherController implements Initializable {
 			}
 		}
 		
-		if(event.getSource() == addCours) {
+		if(event.getSource() == ModifCours) {
 			
 		}
 		
@@ -205,15 +205,11 @@ public class TeacherController implements Initializable {
 			alert.showAndWait();
 		}
 		
-		if(event.getSource() == suppCours) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information");
-			alert.setHeaderText("Vous n'avez pas les droits pour supprimer des fichiers");
-			alert.setContentText("Demandez à un administrateur !");
-			alert.showAndWait();
+		if(event.getSource() == voirCours) {
+
 		}
 		
-		if(event.getSource() == inscris) {
+		if(event.getSource() == inscrit) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText("Vous êtes bien inscrit !");

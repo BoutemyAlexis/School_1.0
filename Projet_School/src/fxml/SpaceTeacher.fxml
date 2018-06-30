@@ -58,7 +58,7 @@
                               <Font name="Arial Black" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addCours" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Ajouter des cours" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="ModifCours" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Modifier mon cours" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" />
                            </GridPane.margin>
@@ -74,7 +74,7 @@
                               <Font name="Arial Black" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="inscris" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Suis-je bien inscrit ?" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Button fx:id="inscrit" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Suis-je bien inscrit ?" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" />
                            </GridPane.margin>
@@ -82,7 +82,7 @@
                               <Font name="Arial Black" size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="suppCours" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Supprimer des cours" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="voirCours" defaultButton="true" focusTraversable="false" maxHeight="500.0" maxWidth="1000.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#goInAction" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: silver;" text="Consulter mes cours" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Black" size="24.0" />
                            </font>

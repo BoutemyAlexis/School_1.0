@@ -102,7 +102,7 @@ public class ConnexionController extends Connexion {
 		 							Main.getEnseignant().setTelephone(infosUser.get(6).toString());
 		 							Main.getEnseignant().setIdCours(Integer.parseInt(infosUser.get(7).toString()));
 		 							Main.getEnseignant().setCours((Cours) infosUser.get(8));
-		 							
+
 		 							Main.changeScene("/fxml/HomeTeacher.fxml");
 		 						}
 		 						if(fonction.equals("secretaire")|| fonction.equals("Secetaire")) {

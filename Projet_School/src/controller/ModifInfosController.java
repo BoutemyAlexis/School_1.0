@@ -101,7 +101,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 			alert.showAndWait();
 			
 			try {
-				Main.changeScene("/fxml/HomeStudent.fxml");
+				Main.changeScene("/fxml/SpaceStudent.fxml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -122,7 +122,7 @@ public class ModifInfosController extends Connexion implements Initializable {
 			alert.showAndWait();
 			
 			try {
-				Main.changeScene("/fxml/HomeTeacher.fxml");
+				Main.changeScene("/fxml/SpaceTeacher.fxml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -134,10 +134,10 @@ public class ModifInfosController extends Connexion implements Initializable {
 	private void homeAction(ActionEvent event) {
 		try {
 			if(Main.getEtudiant().getId() > 0) {
-				Main.changeScene("/fxml/HomeStudent.fxml");
+				Main.changeScene("/fxml/SpaceStudent.fxml");
 			}
 			else {
-				Main.changeScene("/fxml/HomeTeacher.fxml");
+				Main.changeScene("/fxml/SpaceTeacher.fxml");
 			}
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -155,10 +155,10 @@ public class ModifInfosController extends Connexion implements Initializable {
 		if(e.getCode() == KeyCode.ESCAPE) {
 			try {
 				if(Main.getEtudiant().getId() > 0) {
-					Main.changeScene("/fxml/HomeStudent.fxml");
+					Main.changeScene("/fxml/SpaceStudent.fxml");
 				}
 				else {
-					Main.changeScene("/fxml/HomeTeacher.fxml");
+					Main.changeScene("/fxml/SpaceTeacher.fxml");
 				}
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -178,8 +178,8 @@ public class ModifInfosController extends Connexion implements Initializable {
 			nom.setText(Main.getEnseignant().getNom());
 			mail.setText(Main.getEnseignant().getMail());
 			telephone.setText(Main.getEnseignant().getTelephone());
-			groupe.setVisible(false);
-			grp.setVisible(false);
+			grp.setText("Nom de votre cours :");
+			groupe.setText(Main.getEnseignant().getCours().getNomCours());
 		}
 		
 		if(Main.getEtudiant().getId() > 0) {

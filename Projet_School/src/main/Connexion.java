@@ -150,14 +150,13 @@ public class Connexion {
 				String sql3 = "SELECT * FROM cours WHERE idEnseignant = ?";
 				PreparedStatement ps3;
 				ps3 = (PreparedStatement) cn.prepareStatement(sql3);
-				ps3.setInt(1, Integer.parseInt(info.get(7).toString()));
+				ps3.setString(1, id);
 				rs3 = ps3.executeQuery();
 				Cours cours = new Cours();
 				while (rs3.next()) {
 					cours.setIdCours(rs3.getString("idCours"));
 					cours.setNomCours(rs3.getString("nomCours"));
 					cours.setDescription(rs3.getString("description"));
-					info.add(cours);
 				}
 				info.add(cours);
 			}
